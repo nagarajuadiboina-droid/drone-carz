@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)file:///C:/Users/nagar/Downloads/aeroarchitect_drone_academy_app%20(1).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#030712">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>AeroArchitect • Multirotor Engineering &amp; 3D Flight Arena</title>
+
+  <!-- Tailwind CSS -->
+  <script src="./carz drone app_files/saved_resource"></script>
+  <!-- Lucide Icons -->
+  <script src="./carz drone app_files/lucide@latest"></script>
+  <!-- Three.js 3D Library -->
+  <script src="./carz drone app_files/three.min.js.download"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./carz drone app_files/css2" rel="stylesheet">
+
+  <style>
+    * {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: #030712;
+      color: #f8fafc;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+    .glow-cyan {
+      box-shadow: 0 0 20px -3px rgba(6, 182, 212, 0.45);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.45);
+    }
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.55);
+    }
+    .glass-dock {
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+    }
+    /* Virtual Joystick Elements */
+    .joystick-zone {
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .joystick-base {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 2px solid rgba(6, 182, 212, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.15) inset;
+    }
+    .joystick-thumb {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, #38bdf8 0%, #0284c7 100%);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+      transform: translate(0px, 0px);
+      will-change: transform;
+      pointer-events: none;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.-top-1\.5{top:-0.375rem}.bottom-3{bottom:0.75rem}.left-1\/2{left:50%}.left-3{left:0.75rem}.right-3{right:0.75rem}.top-0{top:0px}.top-3{top:0.75rem}.top-4{top:1rem}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-1\.5{margin-bottom:0.375rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-2{height:0.5rem}.h-3{height:0.75rem}.h-3\.5{height:0.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[2px\]{height:2px}.h-\[400px\]{height:400px}.h-\[420px\]{height:420px}.h-\[440px\]{height:440px}.h-\[520px\]{height:520px}.h-full{height:100%}.max-h-\[580px\]{max-height:580px}.min-h-screen{min-height:100vh}.w-2{width:0.5rem}.w-3{width:0.75rem}.w-3\.5{width:0.875rem}.w-36{width:9rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-7xl{max-width:80rem}.max-w-\[190px\]{max-width:190px}.max-w-\[95vw\]{max-width:95vw}.max-w-\[120px\]{max-width:120px}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-12{--tw-translate-y:-3rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;user-select:none}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.space-x-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.625rem * var(--tw-space-x-reverse));margin-left:calc(0.625rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-0\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.125rem * var(--tw-space-y-reverse))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.625rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-3\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.875rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.875rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-800{--tw-border-opacity:1;border-color:rgb(146 64 14 / var(--tw-border-opacity, 1))}.border-cyan-700{--tw-border-opacity:1;border-color:rgb(14 116 144 / var(--tw-border-opacity, 1))}.border-cyan-700\/60{border-color:rgb(14 116 144 / 0.6)}.border-cyan-800{--tw-border-opacity:1;border-color:rgb(21 94 117 / var(--tw-border-opacity, 1))}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(4 120 87 / var(--tw-border-opacity, 1))}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(6 95 70 / var(--tw-border-opacity, 1))}.border-emerald-800\/60{border-color:rgb(6 95 70 / 0.6)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-slate-800\/80{border-color:rgb(30 41 59 / 0.8)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-amber-950\/50{background-color:rgb(69 26 3 / 0.5)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}.bg-cyan-500{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.bg-cyan-950{--tw-bg-opacity:1;background-color:rgb(8 51 68 / var(--tw-bg-opacity, 1))}.bg-cyan-950\/80{background-color:rgb(8 51 68 / 0.8)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-400\/80{background-color:rgb(52 211 153 / 0.8)}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(2 44 34 / var(--tw-bg-opacity, 1))}.bg-emerald-950\/40{background-color:rgb(2 44 34 / 0.4)}.bg-emerald-950\/80{background-color:rgb(2 44 34 / 0.8)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-slate-900\/85{background-color:rgb(15 23 42 / 0.85)}.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}.bg-slate-950\/90{background-color:rgb(2 6 23 / 0.9)}.bg-cyan-950\/30{background-color:rgb(8 51 68 / 0.3)}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-cyan-500{--tw-gradient-from:#06b6d4 var(--tw-gradient-from-position);--tw-gradient-to:rgb(6 182 212 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-sky-400{--tw-gradient-to:rgb(56 189 248 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #38bdf8 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-emerald-400{--tw-gradient-to:#34d399 var(--tw-gradient-to-position)}.p-1\.5{padding:0.375rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.pb-1{padding-bottom:0.25rem}.pb-2{padding-bottom:0.5rem}.pb-24{padding-bottom:6rem}.pr-1{padding-right:0.25rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-tighter{letter-spacing:-0.05em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.text-amber-200{--tw-text-opacity:1;color:rgb(253 230 138 / var(--tw-text-opacity, 1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.placeholder-slate-500::placeholder{--tw-placeholder-opacity:1;color:rgb(100 116 139 / var(--tw-placeholder-opacity, 1))}.accent-amber-400{accent-color:#fbbf24}.accent-cyan-400{accent-color:#22d3ee}.accent-emerald-400{accent-color:#34d399}.opacity-0{opacity:0}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-cyan-500\/30{--tw-shadow-color:rgb(6 182 212 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-75{transition-duration:75ms}.selection\:bg-cyan-500 *::selection{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.selection\:text-black *::selection{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.selection\:bg-cyan-500::selection{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.selection\:text-black::selection{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(251 191 36 / var(--tw-bg-opacity, 1))}.hover\:bg-cyan-400:hover{--tw-bg-opacity:1;background-color:rgb(34 211 238 / var(--tw-bg-opacity, 1))}.hover\:bg-cyan-900:hover{--tw-bg-opacity:1;background-color:rgb(22 78 99 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-400:hover{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.hover\:text-emerald-300:hover{--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-1:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-cyan-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(34 211 238 / var(--tw-ring-opacity, 1))}.active\:bg-amber-600:active{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.active\:bg-cyan-600:active{--tw-bg-opacity:1;background-color:rgb(8 145 178 / var(--tw-bg-opacity, 1))}@media (min-width: 640px){.sm\:block{display:block}.sm\:flex{display:flex}.sm\:hidden{display:none}.sm\:h-\[480px\]{height:480px}.sm\:h-\[500px\]{height:500px}.sm\:w-auto{width:auto}.sm\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:gap-3{gap:0.75rem}.sm\:p-5{padding:1.25rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:block{display:block}.md\:flex{display:flex}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}}@media (min-width: 1024px){.lg\:col-span-4{grid-column:span 4 / span 4}.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:col-span-8{grid-column:span 8 / span 8}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}</style></head>
+
+<body class="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+
+  <!-- App Status & Header Bar -->
+  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-2.5 sm:px-6">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <!-- App Brand -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchAppTab('physics')">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-sky-400 to-emerald-400 flex items-center justify-center text-slate-950 shadow-md shadow-cyan-500/30">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="crosshair" aria-hidden="true" class="lucide lucide-crosshair w-5 h-5"><circle cx="12" cy="12" r="10"></circle><line x1="22" x2="18" y1="12" y2="12"></line><line x1="6" x2="2" y1="12" y2="12"></line><line x1="12" x2="12" y1="6" y2="2"></line><line x1="12" x2="12" y1="22" y2="18"></line></svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-sm sm:text-base tracking-tight text-white">AeroArchitect</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold">APP v4.0</span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">Interactive Multirotor Engineering &amp; 3D Flight Suite</p>
+        </div>
+      </div>
+
+      <!-- Live Flight Telemetry Badges (App Header) -->
+      <div class="flex items-center gap-2 sm:gap-3 text-xs font-mono">
+        <div class="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="radio" aria-hidden="true" class="lucide lucide-radio w-3.5 h-3.5 text-cyan-400"><path d="M16.247 7.761a6 6 0 0 1 0 8.478"></path><path d="M19.075 4.933a10 10 0 0 1 0 14.134"></path><path d="M4.925 19.067a10 10 0 0 1 0-14.134"></path><path d="M7.753 16.239a6 6 0 0 1 0-8.478"></path><circle cx="12" cy="12" r="2"></circle></svg>
+          <span>ELRS 500Hz</span>
+        </div>
+
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="battery-charging" aria-hidden="true" class="lucide lucide-battery-charging w-3.5 h-3.5"><path d="m11 7-3 5h4l-3 5"></path><path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.935"></path><path d="M22 14v-4"></path><path d="M5.14 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2.936"></path></svg>
+          <span id="header-voltage">25.2V (6S)</span>
+        </div>
+
+        <button onclick="toggleAudio()" id="btn-audio-toggle" class="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition" title="Toggle Motor Sounds">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="volume-2" aria-hidden="true" id="icon-audio" class="lucide lucide-volume-2 w-4 h-4 text-cyan-400"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+        </button>
+
+        <button onclick="toggleAppFullscreen()" class="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition hidden sm:block" title="Toggle Fullscreen">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize" aria-hidden="true" class="lucide lucide-maximize w-4 h-4"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewports Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5 pb-24 space-y-5">
+
+    <!-- ================================================================= -->
+    <!-- VIEW 1: FLIGHT PHYSICS (AERODYNAMICS & ATTITUDE) -->
+    <!-- ================================================================= -->
+    <section id="view-physics" class="app-tab-view space-y-4">
+      <div class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-400 text-xs font-mono mb-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wind" aria-hidden="true" class="lucide lucide-wind w-3.5 h-3.5"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"></path><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"></path><path d="M9.8 4.4A2 2 0 1 1 11 8H2"></path></svg>
+            <span>MODULE 1 • HOW MULTIROTORS FLY</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-bold text-white tracking-tight">Aerodynamics, Reaction Torque &amp; 6-DOF Control</h1>
+          <p class="text-xs text-slate-300 max-w-2xl mt-1 leading-relaxed">
+            Multirotors achieve directional flight without swashplates by varying brushless motor RPMs. Total thrust balances gravity ($T = mg$), while diagonal torque cancellation prevents uncontrolled spinning.
+          </p>
+        </div>
+
+        <!-- Maneuver Presets -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="applyPhysicsPreset('hover')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-mono font-medium border border-slate-700 transition">
+            Hover (50%)
+          </button>
+          <button onclick="applyPhysicsPreset('pitch')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded-lg text-xs font-mono font-medium border border-slate-700 transition">
+            Pitch Fwd
+          </button>
+          <button onclick="applyPhysicsPreset('roll')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 rounded-lg text-xs font-mono font-medium border border-slate-700 transition">
+            Roll Right
+          </button>
+          <button onclick="applyPhysicsPreset('yaw')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-400 rounded-lg text-xs font-mono font-medium border border-slate-700 transition">
+            Yaw Pirouette
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- 3D Drone Viewport (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col space-y-3">
+          <div class="relative w-full h-[400px] sm:h-[480px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+            <div id="physics-canvas-container" class="w-full h-full"><canvas width="1022" height="597" style="display: block; width: 818px; height: 478px;"></canvas></div>
+
+            <!-- Overlaid Aerodynamic HUD -->
+            <div class="absolute top-3 left-3 glass-panel rounded-xl p-3 text-xs font-mono space-y-1 shadow-lg pointer-events-none">
+              <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                <span>Vector Telemetry</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <div class="text-slate-300">Net Aerodynamic Thrust: <span id="phys-hud-thrust" class="text-emerald-400 font-bold">5.88 N</span></div>
+              <div class="text-slate-300">Pitch Angle ($\theta$): <span id="phys-hud-pitch" class="text-white font-bold">0.0°</span></div>
+              <div class="text-slate-300">Roll Angle ($\phi$): <span id="phys-hud-roll" class="text-white font-bold">0.0°</span></div>
+              <div class="text-slate-300">Yaw Rate ($\psi$): <span id="phys-hud-yaw" class="text-amber-400 font-bold">0.0 °/s</span></div>
+            </div>
+
+            <div class="absolute bottom-3 right-3 bg-slate-900/80 px-2.5 py-1 rounded-lg text-[10px] text-slate-400 font-mono pointer-events-none border border-slate-800">
+              Left-Click + Drag to Rotate • Scroll to Zoom
+            </div>
+          </div>
+
+          <!-- RC Sliders -->
+          <div class="glass-panel rounded-2xl p-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+            <div>
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Throttle:</span>
+                <span id="lbl-thr" class="text-cyan-400 font-bold">50%</span>
+              </div>
+              <input type="range" id="input-thr" min="0" max="100" value="50" oninput="onPhysicsInputChange()" class="w-full accent-cyan-400 cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Pitch (Elevator):</span>
+                <span id="lbl-pitch" class="text-cyan-400 font-bold">0°</span>
+              </div>
+              <input type="range" id="input-pitch" min="-30" max="30" value="0" oninput="onPhysicsInputChange()" class="w-full accent-cyan-400 cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Roll (Aileron):</span>
+                <span id="lbl-roll" class="text-cyan-400 font-bold">0°</span>
+              </div>
+              <input type="range" id="input-roll" min="-30" max="30" value="0" oninput="onPhysicsInputChange()" class="w-full accent-cyan-400 cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Yaw (Rudder):</span>
+                <span id="lbl-yaw" class="text-cyan-400 font-bold">0</span>
+              </div>
+              <input type="range" id="input-yaw" min="-100" max="100" value="0" oninput="onPhysicsInputChange()" class="w-full accent-cyan-400 cursor-pointer">
+            </div>
+          </div>
+        </div>
+
+        <!-- Physics Telemetry & Educational Matrix (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col space-y-3">
+          <!-- 4-Motor Matrix -->
+          <div class="glass-panel rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="font-bold text-slate-300">Differential Motor RPM</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">Betaflight Quad-X</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+              <!-- M1 -->
+              <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                <div class="flex justify-between text-slate-400 text-[11px]">
+                  <span class="font-bold text-white">M1 (Rear-R)</span>
+                  <span class="text-blue-400 font-bold">CW</span>
+                </div>
+                <div class="text-cyan-300 font-bold text-sm mt-1" id="val-m1-rpm">21,000 RPM</div>
+                <div class="text-[10px] text-slate-400">Thrust: <span id="val-m1-thrust" class="text-emerald-400 font-bold">420g</span></div>
+              </div>
+              <!-- M2 -->
+              <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                <div class="flex justify-between text-slate-400 text-[11px]">
+                  <span class="font-bold text-white">M2 (Front-R)</span>
+                  <span class="text-amber-400 font-bold">CCW</span>
+                </div>
+                <div class="text-cyan-300 font-bold text-sm mt-1" id="val-m2-rpm">21,000 RPM</div>
+                <div class="text-[10px] text-slate-400">Thrust: <span id="val-m2-thrust" class="text-emerald-400 font-bold">420g</span></div>
+              </div>
+              <!-- M3 -->
+              <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                <div class="flex justify-between text-slate-400 text-[11px]">
+                  <span class="font-bold text-white">M3 (Rear-L)</span>
+                  <span class="text-amber-400 font-bold">CCW</span>
+                </div>
+                <div class="text-cyan-300 font-bold text-sm mt-1" id="val-m3-rpm">21,000 RPM</div>
+                <div class="text-[10px] text-slate-400">Thrust: <span id="val-m3-thrust" class="text-emerald-400 font-bold">420g</span></div>
+              </div>
+              <!-- M4 -->
+              <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                <div class="flex justify-between text-slate-400 text-[11px]">
+                  <span class="font-bold text-white">M4 (Front-L)</span>
+                  <span class="text-blue-400 font-bold">CW</span>
+                </div>
+                <div class="text-cyan-300 font-bold text-sm mt-1" id="val-m4-rpm">21,000 RPM</div>
+                <div class="text-[10px] text-slate-400">Thrust: <span id="val-m4-thrust" class="text-emerald-400 font-bold">420g</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aerodynamic Theory Card -->
+          <div class="glass-panel rounded-2xl p-4 text-xs space-y-2.5 leading-relaxed">
+            <h3 class="font-bold text-white flex items-center gap-1.5 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-4 h-4 text-cyan-400"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+              <span>Flight Dynamics Breakdown</span>
+            </h3>
+            <div class="space-y-1.5 text-slate-300">
+              <p><strong class="text-cyan-400">1. Vertical Climb:</strong> Increasing all 4 motors produces net thrust greater than the drone's weight ($T &gt; mg$).</p>
+              <p><strong class="text-emerald-400">2. Pitch Forward:</strong> Speeding up M1 &amp; M3 (rear) while slowing M2 &amp; M4 (front) tilts the thrust vector backward, driving the craft forward.</p>
+              <p><strong class="text-amber-400">3. Torque Yaw:</strong> Speeding up CW motors while slowing CCW motors creates an aerodynamic torque imbalance, rotating the fuselage without climbing.</p>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800 flex justify-between items-center">
+              <span class="text-slate-400 text-[11px]">Next: Design your frame</span>
+              <button onclick="switchAppTab('cad')" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-lg text-xs transition">
+                Open CAD Studio ➔
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 2: PARAMETRIC CAD & 3D EXPLODED PROJECTION -->
+    <!-- ================================================================= -->
+    <section id="view-cad" class="app-tab-view space-y-4 hidden">
+      <div class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-400 text-xs font-mono mb-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="compass" aria-hidden="true" class="lucide lucide-compass w-3.5 h-3.5"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>
+            <span>MODULE 2 • PARAMETRIC AIRFRAME ARCHITECT</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Parametric Airframe Geometry &amp; Exploded View</h2>
+          <p class="text-xs text-slate-300 max-w-2xl mt-1 leading-relaxed">
+            Customize your airframe shape, wheelbase diagonal, and all-up weight. Pull the <strong>Exploded Assembly Slider</strong> to inspect internal hardware sub-assemblies.
+          </p>
+        </div>
+
+        <button onclick="launchFlightWithCADParams()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold rounded-xl transition flex items-center gap-2 text-xs shadow-lg glow-emerald">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plane-takeoff" aria-hidden="true" class="lucide lucide-plane-takeoff w-4 h-4"><path d="M2 22h20"></path><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"></path></svg>
+          <span>Fly This Airframe ➔</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- 3D CAD Viewport (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col space-y-3">
+          <div class="relative w-full h-[420px] sm:h-[480px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+            <div id="cad-canvas-container" class="w-full h-full"><canvas width="1022" height="597" style="display: block; width: 818px; height: 478px;"></canvas></div>
+
+            <!-- Exploded Projection Slider Overlay -->
+            <div class="absolute bottom-3 left-3 right-3 glass-panel rounded-xl p-3 shadow-xl">
+              <div class="flex items-center justify-between text-xs font-mono mb-1">
+                <span class="text-cyan-400 font-bold flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layers" aria-hidden="true" class="lucide lucide-layers w-4 h-4"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
+                  <span>Exploded Hardware Assembly:</span>
+                </span>
+                <span id="cad-lbl-explode" class="text-white font-bold text-sm">0% (Compact)</span>
+              </div>
+              <input type="range" id="cad-slider-explode" min="0" max="100" value="0" oninput="onCADExplodeChange(this.value)" class="w-full accent-cyan-400 cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
+                <span>0% Flight Rig</span>
+                <span>50% Sub-Assemblies</span>
+                <span>100% Fully Projected Parts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parametric Inputs & Inspector (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col space-y-3 text-xs font-mono">
+          <!-- Parametric Frame Config -->
+          <div class="glass-panel rounded-2xl p-4 space-y-3.5">
+            <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="settings" aria-hidden="true" class="lucide lucide-settings w-4 h-4 text-cyan-400"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>Airframe Specifications</span>
+            </h3>
+
+            <!-- Shape -->
+            <div class="space-y-1">
+              <label class="text-slate-400 text-[11px]">Chassis Geometry Shape:</label>
+              <select id="cad-select-shape" onchange="reconstructCADDrone()" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg p-2 font-medium focus:ring-1 focus:ring-cyan-400 outline-none">
+                <option value="quad_x" selected="">Quad-X (Freestyle Standard)</option>
+                <option value="deadcat">Deadcat / Wide-X (Clean FPV View)</option>
+                <option value="true_x">True-X (Agile Racing Symmetry)</option>
+                <option value="h_frame">H-Frame (Classic Long-Range)</option>
+                <option value="hex_x">Hexacopter (6-Rotor Heavy Payload)</option>
+                <option value="plus_frame">Plus (+) Frame (Direct Pitch)</option>
+              </select>
+            </div>
+
+            <!-- Wheelbase -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-slate-400 text-[11px]">
+                <span>Wheelbase (Motor-to-Motor):</span>
+                <span id="cad-lbl-wheelbase" class="text-cyan-400 font-bold">220 mm</span>
+              </div>
+              <input type="range" id="cad-input-wheelbase" min="65" max="450" value="220" oninput="reconstructCADDrone()" class="w-full accent-cyan-400 cursor-pointer">
+            </div>
+
+            <!-- AUW Weight -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-slate-400 text-[11px]">
+                <span>All-Up Weight (AUW):</span>
+                <span id="cad-lbl-weight" class="text-emerald-400 font-bold">680 g</span>
+              </div>
+              <input type="range" id="cad-input-weight" min="40" max="2500" step="10" value="680" oninput="reconstructCADDrone()" class="w-full accent-emerald-400 cursor-pointer">
+            </div>
+
+            <!-- Recommended Prop & Thrust -->
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5 text-[11px]">
+              <div class="flex justify-between text-slate-400">
+                <span>Hover Thrust / Motor:</span>
+                <span id="cad-res-hover" class="text-white font-bold">170 g</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Recommended Prop:</span>
+                <span id="cad-res-prop" class="text-cyan-400 font-bold">5.0" - 5.1" Props</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projected Component Inspector -->
+          <div class="glass-panel rounded-2xl p-4 space-y-2.5">
+            <h4 class="font-bold text-white flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu w-4 h-4 text-cyan-400"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg>
+              <span>Component Inspector</span>
+            </h4>
+            <div id="cad-inspector-box" class="p-3 bg-slate-900/80 rounded-xl border border-slate-800 text-slate-300 space-y-1 text-[11px]">
+          <div class="text-slate-300 font-bold">Compact Assembled Airframe</div>
+          <div>Drag slider to project components in 3D.</div>
+        </div>
+            <button onclick="switchAppTab('builder')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded-lg text-xs font-semibold transition border border-slate-700">
+              Go to Step-by-Step Workshop ➔
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 3: 3D STEP-BY-STEP WORKSHOP & PARTS TRAY -->
+    <!-- ================================================================= -->
+    <section id="view-builder" class="app-tab-view space-y-4 hidden">
+      <!-- Toolbar -->
+      <div class="glass-panel rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-slate-400 font-mono text-[11px] uppercase tracking-wider">Workbench:</span>
+          <button onclick="mountNextComponent()" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-lg transition flex items-center gap-1.5 shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus-circle" aria-hidden="true" class="lucide lucide-plus-circle w-3.5 h-3.5"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
+            <span>Mount Next Part</span>
+          </button>
+          <button onclick="mountAllComponents()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" aria-hidden="true" class="lucide lucide-play w-3.5 h-3.5 text-emerald-400"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+            <span>Auto-Build All</span>
+          </button>
+          <button onclick="disassembleAllComponents()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" aria-hidden="true" class="lucide lucide-rotate-ccw w-3.5 h-3.5 text-amber-400"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span>Strip Down</span>
+          </button>
+          <button onclick="launchFlightWithAssembledBuild()" class="px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold rounded-lg transition flex items-center gap-1.5 shadow glow-emerald">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plane-takeoff" aria-hidden="true" class="lucide lucide-plane-takeoff w-3.5 h-3.5"><path d="M2 22h20"></path><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"></path></svg>
+            <span>Fly Assembled Drone ➔</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-3 font-mono text-slate-300 text-xs">
+          <span>Dry Weight: <strong id="bench-lbl-weight" class="text-emerald-400">394 g</strong></span>
+          <span class="text-slate-600">|</span>
+          <span>Status: <strong id="bench-lbl-count" class="text-cyan-400">9 / 9 Mounted</strong></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- 3D Assembly Stage (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col space-y-3">
+          <div class="relative w-full h-[440px] sm:h-[500px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+            <div id="assembler-canvas-container" class="w-full h-full"><canvas width="891" height="622" style="display: block; width: 713px; height: 498px;"></canvas></div>
+
+            <!-- Current Step Guide Card -->
+            <div class="absolute bottom-3 left-3 right-3 glass-panel rounded-xl p-3.5 shadow-xl">
+              <div class="flex items-center justify-between text-xs font-mono mb-1">
+                <span class="text-cyan-400 font-bold flex items-center gap-1.5" id="step-badge"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-4 h-4 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Assembly 100% Complete</span>
+                <span class="text-slate-400" id="step-tool-badge">Ready for Flight</span>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-1" id="step-title">All 9 Components Installed!</h4>
+              <p class="text-xs text-slate-300 leading-relaxed" id="step-desc">All structural and propulsion hardware mounted. Ready to pilot in the Flight Arena.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Required Parts Shelf (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col space-y-3">
+          <div class="flex items-center justify-between px-1 text-xs font-mono">
+            <span class="text-slate-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="package" aria-hidden="true" class="lucide lucide-package w-4 h-4 text-cyan-400"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path><path d="M12 22V12"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><path d="m7.5 4.27 9 5.15"></path></svg>
+              <span>Required Parts Tray (9 Components)</span>
+            </span>
+            <span class="text-cyan-400 font-bold" id="shelf-counter">9 / 9 Installed</span>
+          </div>
+
+          <div class="space-y-2 max-h-[580px] overflow-y-auto pr-1" id="parts-tray-container">
+          <div onclick="toggleComponentMount(0)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  1
+                </span>
+                <span class="font-bold text-xs text-white">3K Carbon Fiber Arms &amp; Lower Plate</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Structural unibody airframe skeleton</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +125g</span>
+              <span>Tool: 2.0mm Hex Driver</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(1)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  2
+                </span>
+                <span class="font-bold text-xs text-white">CNC Aluminum Standoffs (M3×25mm)</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Electronic stack enclosure spacer</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +18g</span>
+              <span>Tool: Hex Nut Driver</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(2)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  3
+                </span>
+                <span class="font-bold text-xs text-white">4× Brushless Outrunners (2207 1950KV)</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Propulsion stators &amp; N52SH magnets</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +132g</span>
+              <span>Tool: 2.0mm Hex Wrench + Loctite 242</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(3)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  4
+                </span>
+                <span class="font-bold text-xs text-white">4-in-1 ESC (55A) + Low-ESR Capacitor</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">High-amperage MOSFET power control</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +28g</span>
+              <span>Tool: TS101 Soldering Iron (400°C)</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(4)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  5
+                </span>
+                <span class="font-bold text-xs text-white">F722 Dual-Gyro Flight Controller</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Brain, IMU Gyro &amp; PID loop processor</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +12g</span>
+              <span>Tool: Silicone Soft Grommets</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(5)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  6
+                </span>
+                <span class="font-bold text-xs text-white">Micro FPV Camera 1200TVL &amp; TPU Mount</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Real-time pilot vision &amp; OSD</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +14g</span>
+              <span>Tool: 1.5mm Hex Driver</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(6)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  7
+                </span>
+                <span class="font-bold text-xs text-white">ExpressLRS 2.4GHz Diversity Receiver</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Ultra-low latency radio link</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +4g</span>
+              <span>Tool: Solder &amp; Heat Shrink</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(7)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  8
+                </span>
+                <span class="font-bold text-xs text-white">3K Carbon Top Plate &amp; LiPo Pad</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Chassis roof &amp; battery strap plate</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +42g</span>
+              <span>Tool: 2.0mm Hex Wrench</span>
+            </div>
+          </div>
+        
+          <div onclick="toggleComponentMount(8)" class="cursor-pointer p-3 rounded-xl border transition-all bg-cyan-950/30 border-cyan-700/60 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-[10px] font-mono">
+                  9
+                </span>
+                <span class="font-bold text-xs text-white">4× Tri-Blade 5.1" Polycarbonate Props</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                MOUNTED
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">Rotating aerodynamic airfoils</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +19g</span>
+              <span>Tool: 8mm Prop Nut Wrench</span>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 4: 3D MAIDEN FLIGHT ARENA (PILOT YOUR BUILD) -->
+    <!-- ================================================================= -->
+    <section id="view-flight-arena" class="app-tab-view space-y-4 hidden">
+      <div class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-700 text-emerald-400 text-xs font-mono mb-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plane" aria-hidden="true" class="lucide lucide-plane w-3.5 h-3.5"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+            <span>MODULE 4 • 6-DOF FLIGHT SIMULATION</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Maiden Flight Arena: Pilot Your Assembled Drone</h2>
+          <p class="text-xs text-slate-300 max-w-2xl mt-1 leading-relaxed">
+            Flight simulator verifies your <strong>assembled hardware</strong> (motors, props, ESC, FC) and simulates 6-DOF multirotor aerodynamics, ground effect, and drag.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="toggleFlightMode()" id="btn-flight-mode" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 border border-cyan-700 text-cyan-300 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition font-mono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="compass" aria-hidden="true" class="lucide lucide-compass w-3.5 h-3.5"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>
+            <span>Mode: Angle (Auto-Level)</span>
+          </button>
+          <button onclick="toggleCameraView()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-medium text-slate-300 transition flex items-center gap-1.5 font-mono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="video" aria-hidden="true" class="lucide lucide-video w-3.5 h-3.5"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>
+            <span id="lbl-camera-view">View: 3rd-Person Chase</span>
+          </button>
+          <button onclick="resetSimPosition()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-medium text-slate-300 transition flex items-center gap-1.5 font-mono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" aria-hidden="true" class="lucide lucide-rotate-ccw w-3.5 h-3.5 text-amber-400"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span>Reset Pad</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Missing Hardware Alert Banner -->
+      <div id="sim-missing-parts-banner" class="hidden p-3.5 rounded-xl bg-amber-950/50 border border-amber-800 text-amber-300 text-xs flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-triangle" aria-hidden="true" class="lucide lucide-alert-triangle w-4 h-4 text-amber-400 shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+          <div>
+            <span class="font-bold">Assembly Incomplete:</span>
+            <span id="sim-missing-parts-desc" class="text-amber-200">Propellers or motors are unmounted. No aerodynamic lift will be produced.</span>
+          </div>
+        </div>
+        <button onclick="switchAppTab('builder')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-lg text-[11px] transition">
+          Go to Workbench ➔
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- 3D Flight Viewport (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col space-y-3">
+          <div class="relative w-full h-[420px] sm:h-[500px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl select-none">
+            <div id="sim-canvas-container" class="w-full h-full"><canvas width="1022" height="622" style="display: block; width: 818px; height: 498px;"></canvas></div>
+
+            <!-- Gate Pass Notification Banner -->
+            <div id="sim-gate-banner" class="absolute top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-black font-extrabold px-4 py-1.5 rounded-full text-xs shadow-lg transition-all duration-300 -translate-y-12 opacity-0 pointer-events-none flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="flag" aria-hidden="true" class="lucide lucide-flag w-3.5 h-3.5"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"></path></svg>
+              <span id="sim-gate-banner-text">GATE 1 CLEARED! +100 PTS</span>
+            </div>
+
+            <!-- 3rd Person Telemetry Overlay (Top Left) -->
+            <div id="sim-chase-hud" class="absolute top-3 left-3 pointer-events-none space-y-2 font-mono text-xs">
+              <div class="glass-panel rounded-xl px-3 py-2 shadow">
+                <div class="text-slate-400 text-[10px] uppercase tracking-wider flex items-center justify-between mb-1">
+                  <span>Flight Telemetry</span>
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                </div>
+                <div class="grid grid-cols-3 gap-3 text-white text-[11px]">
+                  <div>Speed: <span id="chase-val-speed" class="text-cyan-400 font-bold">0 km/h</span></div>
+                  <div>Altitude: <span id="chase-val-alt" class="text-emerald-400 font-bold">0.1 m</span></div>
+                  <div>Throttle: <span id="chase-val-thr" class="text-amber-400 font-bold">0%</span></div>
+                </div>
+                <div class="mt-1 pt-1 border-t border-slate-800 flex justify-between text-[10px] text-slate-400">
+                  <span>Gates: <span id="chase-val-gates" class="text-white font-bold">0 / 5</span></span>
+                  <span id="chase-val-parts" class="text-emerald-400 font-bold">9 / 9 Parts</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- FPV Goggles OSD Overlay (1st-Person) -->
+            <div id="sim-fpv-hud" class="hidden absolute inset-0 pointer-events-none font-mono text-emerald-400 text-xs p-5 flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <div class="space-y-1">
+                  <div class="bg-black/50 px-2 py-0.5 rounded border border-emerald-500/30">BAT: <span id="fpv-val-voltage" class="font-bold text-white">25.2V (6S)</span></div>
+                  <div class="bg-black/50 px-2 py-0.5 rounded border border-emerald-500/30">CUR: <span id="fpv-val-amps" class="font-bold text-white">0.0 A</span></div>
+                </div>
+                <div class="text-center">
+                  <div class="text-sm font-extrabold tracking-widest bg-black/60 px-3 py-0.5 rounded border border-emerald-500/40" id="fpv-val-mode">ANGLE MODE</div>
+                  <div class="text-[10px] text-emerald-300 mt-0.5">ELRS 2.4G • 500Hz • 99% RSSI</div>
+                </div>
+                <div class="text-right space-y-1">
+                  <div class="bg-black/50 px-2 py-0.5 rounded border border-emerald-500/30">TIMER: <span id="fpv-val-time" class="font-bold text-white">00:02</span></div>
+                  <div class="bg-black/50 px-2 py-0.5 rounded border border-emerald-500/30">GATES: <span id="fpv-val-gates" class="font-bold text-cyan-300">0 / 5</span></div>
+                </div>
+              </div>
+
+              <!-- Center Artificial Horizon -->
+              <div class="relative flex items-center justify-center">
+                <div id="fpv-horizon-line" class="w-36 h-[2px] bg-emerald-400/80 relative transition-transform duration-75" style="transform: translateY(0px) rotate(0deg);">
+                  <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 border border-emerald-400 rounded-full"></div>
+                </div>
+              </div>
+
+              <!-- Bottom Bar -->
+              <div class="flex justify-between items-end">
+                <div class="bg-black/50 px-2.5 py-1 rounded border border-emerald-500/30">
+                  <div>SPD: <span id="fpv-val-speed" class="font-bold text-white">0 km/h</span></div>
+                  <div>THR: <span id="fpv-val-thr" class="font-bold text-white">0%</span></div>
+                </div>
+                <div class="bg-black/50 px-2.5 py-1 rounded border border-emerald-500/30 text-right">
+                  <div>ALT: <span id="fpv-val-alt" class="font-bold text-white">0.1 m</span></div>
+                  <div>DIST: <span id="fpv-val-dist" class="font-bold text-white">0 m</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- In-Flight Component State (Top Right) -->
+            <div class="absolute top-3 right-3 glass-panel rounded-xl p-2.5 text-[10px] font-mono shadow space-y-1 max-w-[190px]">
+              <div class="flex items-center justify-between text-slate-400 font-bold border-b border-slate-800 pb-1">
+                <span>MOUNTED HARDWARE:</span>
+                <span class="text-emerald-400" id="sim-status-parts-count">9 / 9</span>
+              </div>
+              <div id="sim-parts-list-mini" class="space-y-0.5">
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-slate-400 truncate max-w-[120px]">3K Carbon Fiber Arms &amp; Lower Plate</span>
+              <span class="text-emerald-400 font-bold">✓</span>
+            </div>
+          
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-slate-400 truncate max-w-[120px]">CNC Aluminum Standoffs (M3×25mm)</span>
+              <span class="text-emerald-400 font-bold">✓</span>
+            </div>
+          
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-slate-400 truncate max-w-[120px]">4× Brushless Outrunners (2207 1950KV)</span>
+              <span class="text-emerald-400 font-bold">✓</span>
+            </div>
+          
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-slate-400 truncate max-w-[120px]">4-in-1 ESC (55A) + Low-ESR Capacitor</span>
+              <span class="text-emerald-400 font-bold">✓</span>
+            </div>
+          
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-slate-400 truncate max-w-[120px]">F722 Dual-Gyro Flight Controller</span>
+              <span class="text-emerald-400 font-bold">✓</span>
+            </div>
+          </div>
+            </div>
+
+            <!-- Instructions Strip -->
+            <div class="absolute bottom-3 left-3 right-3 bg-slate-900/85 backdrop-blur border border-slate-800 rounded-xl px-3 py-1.5 text-[11px] text-slate-300 flex flex-wrap items-center justify-between gap-2 pointer-events-none font-mono">
+              <div class="hidden sm:flex items-center gap-2 sm:gap-3">
+                <span><strong class="text-white">SPACE</strong>: Lift</span>
+                <span><strong class="text-white">SHIFT</strong>: Descend</span>
+                <span><strong class="text-white">W/S</strong>: Pitch</span>
+                <span><strong class="text-white">A/D</strong>: Roll</span>
+                <span><strong class="text-white">Q/E</strong>: Yaw</span>
+              </div>
+              <div class="sm:hidden text-cyan-300 font-semibold flex items-center gap-1">
+                <span>Touch &amp; drag twin sticks below to pilot</span>
+              </div>
+              <div class="flex items-center gap-2 text-cyan-400 text-[10px]">
+                <span>[C] FPV Camera</span>
+                <span>[M] Mode</span>
+                <span>[R] Reset</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Dual Virtual Touch Joysticks (Mobile & Touchscreen Mode 2 RC) -->
+          <div class="glass-panel p-3 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono select-none">
+            <!-- Left Stick: Throttle (Y) & Yaw (X) -->
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-center">
+              <div class="text-left hidden md:block">
+                <div class="font-bold text-white text-xs">Left Stick (Mode 2)</div>
+                <div class="text-[10px] text-cyan-400">Vertical: Throttle Lift</div>
+                <div class="text-[10px] text-slate-400">Horizontal: Yaw Spin</div>
+              </div>
+              <div id="stick-left-zone" class="joystick-zone joystick-base">
+                <div id="stick-left-thumb" class="joystick-thumb" style="transform: translate(0px, 0px);"></div>
+                <div class="text-[9px] text-slate-500 pointer-events-none font-mono tracking-tighter">THR / YAW</div>
+              </div>
+            </div>
+
+            <!-- Quick In-Flight Touch Action Buttons for Mobile -->
+            <div class="flex flex-wrap items-center justify-center gap-2">
+              <button onclick="toggleCameraView()" class="px-3 py-2 bg-slate-900 active:bg-cyan-600 border border-slate-700 rounded-xl text-[11px] font-bold text-slate-200 flex items-center gap-1.5 shadow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="video" aria-hidden="true" class="lucide lucide-video w-3.5 h-3.5 text-cyan-400"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>
+                <span>Camera</span>
+              </button>
+              <button onclick="toggleFlightMode()" class="px-3 py-2 bg-slate-900 active:bg-cyan-600 border border-slate-700 rounded-xl text-[11px] font-bold text-slate-200 flex items-center gap-1.5 shadow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="compass" aria-hidden="true" class="lucide lucide-compass w-3.5 h-3.5 text-emerald-400"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>
+                <span>Flight Mode</span>
+              </button>
+              <button onclick="resetSimPosition()" class="px-3 py-2 bg-slate-900 active:bg-amber-600 border border-slate-700 rounded-xl text-[11px] font-bold text-slate-200 flex items-center gap-1.5 shadow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" aria-hidden="true" class="lucide lucide-rotate-ccw w-3.5 h-3.5 text-amber-400"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                <span>Reset</span>
+              </button>
+            </div>
+
+            <!-- Right Stick: Pitch (Y) & Roll (X) -->
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-center">
+              <div id="stick-right-zone" class="joystick-zone joystick-base">
+                <div id="stick-right-thumb" class="joystick-thumb" style="background: radial-gradient(circle, #34d399 0%, #059669 100%); box-shadow: 0 0 12px rgba(52, 211, 153, 0.6);"></div>
+                <div class="text-[9px] text-slate-500 pointer-events-none font-mono tracking-tighter">PITCH / ROLL</div>
+              </div>
+              <div class="text-right hidden md:block">
+                <div class="font-bold text-white text-xs">Right Stick (Mode 2)</div>
+                <div class="text-[10px] text-emerald-400">Vertical: Pitch Fwd/Back</div>
+                <div class="text-[10px] text-slate-400">Horizontal: Roll Left/Right</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Missions & Telemetry Sidebar (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col space-y-3 font-mono text-xs">
+          <!-- Model specs -->
+          <div class="glass-panel rounded-2xl p-4 space-y-2.5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu w-4 h-4 text-emerald-400"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg>
+                <span>Active Flight Model</span>
+              </span>
+              <span id="sim-spec-badge" class="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold">5" CUSTOM</span>
+            </div>
+
+            <div class="space-y-1.5 text-slate-300">
+              <div class="flex justify-between text-slate-400">
+                <span>Frame Geometry:</span>
+                <span id="sim-lbl-shape" class="text-white font-bold uppercase">Quad-X</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Wheelbase Span:</span>
+                <span id="sim-lbl-wheelbase" class="text-cyan-400 font-bold">220 mm</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>All-Up Weight:</span>
+                <span id="sim-lbl-weight" class="text-emerald-400 font-bold">680 g</span>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800 space-y-1">
+              <div class="flex justify-between text-[11px]">
+                <span class="text-slate-400">Aerodynamic Thrust:</span>
+                <span id="sim-lbl-thrust" class="text-emerald-400 font-bold">0.00 N</span>
+              </div>
+              <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800">
+                <div id="sim-thrust-progress" class="bg-emerald-500 h-full rounded-full transition-all duration-75" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maiden Flight Missions -->
+          <div class="glass-panel rounded-2xl p-4 space-y-2.5">
+            <h3 class="font-bold text-white flex items-center gap-1.5 border-b border-slate-800 pb-2 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" aria-hidden="true" class="lucide lucide-award w-4 h-4 text-amber-400"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+              <span>Maiden Flight Checklist</span>
+            </h3>
+
+            <div class="space-y-2 text-slate-300 text-[11px]">
+              <div id="mission-takeoff" class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-3.5 h-3.5 text-emerald-400"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> <span class="text-emerald-300">Take off to 2m hover ✓</span></div>
+              <div id="mission-speed" class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="circle" aria-hidden="true" class="lucide lucide-circle w-3.5 h-3.5 text-slate-500"><circle cx="12" cy="12" r="10"></circle></svg>
+                <span>Reach 30 km/h flight speed (W)</span>
+              </div>
+              <div id="mission-gate" class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="circle" aria-hidden="true" class="lucide lucide-circle w-3.5 h-3.5 text-slate-500"><circle cx="12" cy="12" r="10"></circle></svg>
+                <span>Fly through Neon Gate 1</span>
+              </div>
+              <div id="mission-land" class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="circle" aria-hidden="true" class="lucide lucide-circle w-3.5 h-3.5 text-slate-500"><circle cx="12" cy="12" r="10"></circle></svg>
+                <span>Touch down gently on runway</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 5: BOM & THRUST-TO-WEIGHT CALCULATOR -->
+    <!-- ================================================================= -->
+    <section id="view-bom" class="app-tab-view hidden space-y-4">
+      <div class="glass-panel rounded-2xl p-4 sm:p-5">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-400 text-xs font-mono mb-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calculator" aria-hidden="true" class="lucide lucide-calculator w-3.5 h-3.5"><rect width="16" height="20" x="4" y="2" rx="2"></rect><line x1="8" x2="16" y1="6" y2="6"></line><line x1="16" x2="16" y1="14" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+          <span>MODULE 5 • POWER MATCHING</span>
+        </div>
+        <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Thrust-to-Weight (T:W) &amp; LiPo Endurance Math</h2>
+        <p class="text-xs text-slate-300 max-w-2xl mt-1 leading-relaxed">
+          Multirotors require at least a 2:1 T:W ratio for stable hovering, and 5:1+ for agile freestyle or racing maneuvers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 text-xs font-mono">
+        <!-- Inputs -->
+        <div class="glass-panel rounded-2xl p-4 space-y-3">
+          <h3 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Build Input Parameters</h3>
+
+          <div class="space-y-1">
+            <label class="text-slate-400">Class Preset:</label>
+            <select id="calc-preset-select" onchange="applyBOMPreset(this.value)" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg p-2 font-medium">
+              <option value="5inch" selected="">5" Freestyle (6S 2207 1950KV)</option>
+              <option value="3inch">3" Cinewhoop (4S 1507 3800KV)</option>
+              <option value="7inch">7" Long-Range (6S 2806.5 1300KV)</option>
+              <option value="micro">65mm Tiny Whoop (1S 0802 19000KV)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-slate-400">
+              <span>All-Up Weight:</span>
+              <span id="bom-lbl-weight" class="text-emerald-400 font-bold">680 g</span>
+            </div>
+            <input type="range" id="bom-slider-weight" min="50" max="2500" value="680" oninput="recomputeBOM()" class="w-full accent-emerald-400 cursor-pointer">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-slate-400">
+              <span>Max Thrust / Motor:</span>
+              <span id="bom-lbl-thrust" class="text-cyan-400 font-bold">1750 g</span>
+            </div>
+            <input type="range" id="bom-slider-thrust" min="100" max="3500" value="1750" oninput="recomputeBOM()" class="w-full accent-cyan-400 cursor-pointer">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-slate-400">
+              <span>Battery Capacity:</span>
+              <span id="bom-lbl-bat" class="text-amber-400 font-bold">1300 mAh</span>
+            </div>
+            <input type="range" id="bom-slider-bat" min="300" max="5000" step="50" value="1300" oninput="recomputeBOM()" class="w-full accent-amber-400 cursor-pointer">
+          </div>
+        </div>
+
+        <!-- Outputs -->
+        <div class="glass-panel rounded-2xl p-4 space-y-3">
+          <h3 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Calculated Aerodynamics</h3>
+
+          <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-800 space-y-1">
+            <div class="flex justify-between text-slate-400">
+              <span>Thrust-to-Weight:</span>
+              <span id="bom-res-tw" class="text-emerald-400 font-extrabold text-base">10.3 : 1</span>
+            </div>
+            <div class="text-[11px] text-slate-300" id="bom-res-tw-desc">High-velocity freestyle &amp; racing agility.</div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-400">Hover Throttle:</div>
+              <div class="text-cyan-400 font-bold text-sm" id="bom-res-hover">10%</div>
+            </div>
+            <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-400">Est. Hover Time:</div>
+              <div class="text-amber-400 font-bold text-sm" id="bom-res-time">13.9 Mins</div>
+            </div>
+          </div>
+
+          <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800 text-slate-300">
+            <div class="text-[10px] text-slate-400">Full Burst Current:</div>
+            <div class="text-white font-bold" id="bom-res-burst">145 A (~36.2A / ESC)</div>
+          </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="glass-panel rounded-2xl p-4 space-y-2.5">
+          <h3 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Safety Checklist</h3>
+          <ul class="space-y-2 text-slate-300 text-[11px] leading-relaxed">
+            <li class="flex items-start gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-4 h-4 text-emerald-400 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+              <span><strong>Smoke Stopper Check:</strong> Always plug in a current-limiting smoke stopper before your first LiPo connection.</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-4 h-4 text-emerald-400 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+              <span><strong>Props OFF on Bench:</strong> Never connect a battery with propellers attached inside the workshop.</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-4 h-4 text-emerald-400 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+              <span><strong>Low-ESR Capacitor:</strong> Solder a 35V 1000uF capacitor across the battery pads to absorb active braking voltage spikes.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 6: AERO MENTOR AI CHAT -->
+    <!-- ================================================================= -->
+    <section id="view-chat" class="app-tab-view hidden space-y-4">
+      <div class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-400 text-xs font-mono mb-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bot" aria-hidden="true" class="lucide lucide-bot w-3.5 h-3.5"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+            <span>AEROARCHITECT KNOWLEDGE BASE</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Ask Your Aerospace Systems Mentor</h2>
+          <p class="text-xs text-slate-300 max-w-2xl mt-1 leading-relaxed">
+            Get instant answers on multirotor physics, motor KV selection, Betaflight gyro filters, and PID tuning.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span class="text-slate-300">AI Mentor Online</span>
+        </div>
+      </div>
+
+      <!-- Chat Shell -->
+      <div class="glass-panel rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[520px]">
+        <div id="mentor-chat-messages" class="flex-1 p-4 space-y-3.5 overflow-y-auto">
+          <!-- Welcome Message -->
+          <div class="flex gap-3 items-start max-w-3xl">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 text-slate-950 flex items-center justify-center font-bold text-xs shrink-0 shadow">
+              AA
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 text-xs text-slate-200 leading-relaxed shadow space-y-2">
+              <p class="font-bold text-white">Greetings, Pilot! I am your AeroArchitect Systems Mentor.</p>
+              <p>I can help you understand:</p>
+              <ul class="list-disc list-inside space-y-1 text-slate-300">
+                <li>How multirotors generate lift, pitch, roll, and yaw without tail rotors.</li>
+                <li>Selecting motor KV ratings, propeller pitch, and LiPo cell counts.</li>
+                <li>Soldering best practices, smoke stoppers, and bench continuity tests.</li>
+                <li>Betaflight gyro filtering, DShot ESC protocols, and PID loop tuning.</li>
+              </ul>
+              <p class="text-cyan-400 font-medium">What type of drone build are you planning, or what aerodynamic physics question do you have?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="p-3 bg-slate-950/90 border-t border-slate-800 flex gap-2">
+          <input type="text" id="mentor-chat-input" onkeydown="handleChatInputKeyDown(event)" placeholder="Ask about flight physics, motor KV, PID tuning, or soldering..." class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400">
+          <button onclick="sendUserChatMessage()" class="px-4 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow">
+            <span>Send</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" aria-hidden="true" class="lucide lucide-send w-3.5 h-3.5"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Bottom App Dock -->
+  <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 glass-dock px-2 py-1.5 rounded-2xl shadow-2xl flex items-center gap-1 max-w-[95vw] overflow-x-auto text-[11px] font-medium">
+    <button onclick="switchAppTab('physics')" id="dock-btn-physics" class="dock-btn active px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 shadow whitespace-nowrap bg-cyan-500 text-slate-950 font-bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wind" aria-hidden="true" class="lucide lucide-wind w-4 h-4"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"></path><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"></path><path d="M9.8 4.4A2 2 0 1 1 11 8H2"></path></svg>
+      <span>Physics 3D</span>
+    </button>
+    <button onclick="switchAppTab('cad')" id="dock-btn-cad" class="dock-btn px-3 py-2 rounded-xl hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap text-slate-400">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="compass" aria-hidden="true" class="lucide lucide-compass w-4 h-4"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>
+      <span>CAD Studio</span>
+    </button>
+    <button onclick="switchAppTab('builder')" id="dock-btn-builder" class="dock-btn px-3 py-2 rounded-xl hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap text-slate-400">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wrench" aria-hidden="true" class="lucide lucide-wrench w-4 h-4"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"></path></svg>
+      <span>3D Workshop</span>
+    </button>
+    <button onclick="switchAppTab('flight-arena')" id="dock-btn-flight-arena" class="dock-btn px-3.5 py-2 rounded-xl text-emerald-400 hover:text-emerald-300 transition-all flex items-center gap-1.5 bg-emerald-950/40 border border-emerald-800/60 whitespace-nowrap glow-emerald text-slate-400">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plane-takeoff" aria-hidden="true" class="lucide lucide-plane-takeoff w-4 h-4"><path d="M2 22h20"></path><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"></path></svg>
+      <span>Flight Arena</span>
+    </button>
+    <button onclick="switchAppTab('bom')" id="dock-btn-bom" class="dock-btn px-3 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu w-4 h-4"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg>
+      <span>BOM &amp; T:W</span>
+    </button>
+    <button onclick="switchAppTab('chat')" id="dock-btn-chat" class="dock-btn px-3 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bot" aria-hidden="true" class="lucide lucide-bot w-4 h-4 text-cyan-400"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+      <span>AI Mentor</span>
+    </button>
+  </nav>
+
+  <!-- Application Core Script -->
+  <script>
+    const appState = {
+      activeTab: 'physics',
+      physics: {
+        throttle: 50,
+        pitch: 0,
+        roll: 0,
+        yaw: 0
+      },
+      cad: {
+        shape: 'quad_x',
+        wheelbase: 220,
+        weight: 680,
+        explodedPct: 0
+      },
+      workshop: {
+        mounted: [true, true, true, true, true, true, true, true, true]
+      },
+      sim: {
+        pos: new THREE.Vector3(0, 0.15, 0),
+        vel: new THREE.Vector3(0, 0, 0),
+        rot: new THREE.Euler(0, 0, 0, 'YXZ'),
+        throttle: 0,
+        flightMode: 'angle',
+        cameraMode: 'chase',
+        flightTimeSec: 0,
+        gatesPassed: [false, false, false, false, false],
+        keys: {},
+        audioEnabled: true,
+        // Mobile Virtual Joysticks input values [-1 to +1]
+        touchInput: {
+          throttleSpeed: 0, // -1 (descend) to +1 (ascend)
+          yaw: 0,           // -1 (left) to +1 (right)
+          pitch: 0,         // -1 (backward) to +1 (forward)
+          roll: 0           // -1 (left) to +1 (right)
+        }
+      }
+    };
+
+    const REQUIRED_HARDWARE_PARTS = [
+      {
+        id: 'frame',
+        name: '3K Carbon Fiber Arms & Lower Plate',
+        sub: 'Structural unibody airframe skeleton',
+        weight: 125,
+        step: 1,
+        tool: '2.0mm Hex Driver',
+        desc: 'Mount the 4mm-thick chamfered carbon arms to the lower center plate using high-tensile steel M3 bolts.'
+      },
+      {
+        id: 'standoffs',
+        name: 'CNC Aluminum Standoffs (M3×25mm)',
+        sub: 'Electronic stack enclosure spacer',
+        weight: 18,
+        step: 2,
+        tool: 'Hex Nut Driver',
+        desc: 'Fasten textured 7075 aluminum standoffs to maintain a safe 25mm clearance for the flight controller and ESC stack.'
+      },
+      {
+        id: 'motors',
+        name: '4× Brushless Outrunners (2207 1950KV)',
+        sub: 'Propulsion stators & N52SH magnets',
+        weight: 132,
+        step: 3,
+        tool: '2.0mm Hex Wrench + Loctite 242',
+        desc: 'Bolt motors to arm tips. Apply blue threadlocker so rotor vibrations do not loosen motor screws in mid-air.'
+      },
+      {
+        id: 'esc',
+        name: '4-in-1 ESC (55A) + Low-ESR Capacitor',
+        sub: 'High-amperage MOSFET power control',
+        weight: 28,
+        step: 4,
+        tool: 'TS101 Soldering Iron (400°C)',
+        desc: 'Solder motor phase wires and battery lead (XT60) with a 35V 1000uF low-ESR capacitor across positive and ground.'
+      },
+      {
+        id: 'fc',
+        name: 'F722 Dual-Gyro Flight Controller',
+        sub: 'Brain, IMU Gyro & PID loop processor',
+        weight: 12,
+        step: 5,
+        tool: 'Silicone Soft Grommets',
+        desc: 'Soft-mount the flight controller on silicone anti-vibration dampers directly above the ESC. Connect 8-pin wire harness.'
+      },
+      {
+        id: 'camera',
+        name: 'Micro FPV Camera 1200TVL & TPU Mount',
+        sub: 'Real-time pilot vision & OSD',
+        weight: 14,
+        step: 6,
+        tool: '1.5mm Hex Driver',
+        desc: 'Insert the FPV camera into flexible TPU front brackets angled at 25 degrees for high-speed forward tilt.'
+      },
+      {
+        id: 'rx',
+        name: 'ExpressLRS 2.4GHz Diversity Receiver',
+        sub: 'Ultra-low latency radio link',
+        weight: 4,
+        step: 7,
+        tool: 'Solder & Heat Shrink',
+        desc: 'Solder 5V, Ground, TX, and RX pads to FC UART1. Route T-antenna away from carbon fiber to prevent signal attenuation.'
+      },
+      {
+        id: 'topplate',
+        name: '3K Carbon Top Plate & LiPo Pad',
+        sub: 'Chassis roof & battery strap plate',
+        weight: 42,
+        step: 8,
+        tool: '2.0mm Hex Wrench',
+        desc: 'Fasten the top deck plate to the top of aluminum standoffs. Stick textured silicone pad for non-slip battery grip.'
+      },
+      {
+        id: 'props',
+        name: '4× Tri-Blade 5.1" Polycarbonate Props',
+        sub: 'Rotating aerodynamic airfoils',
+        weight: 19,
+        step: 9,
+        tool: '8mm Prop Nut Wrench',
+        desc: 'Fasten CW and CCW props onto matching motor stators using M5 nylock flanged nuts. Tighten until snug.'
+      }
+    ];
+
+    /* Synthesizer */
+    let webAudioCtx = null;
+    let motorOscillator = null;
+    let motorGainNode = null;
+
+    function initWebAudio() {
+      if (webAudioCtx) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        webAudioCtx = new AudioCtx();
+        motorOscillator = webAudioCtx.createOscillator();
+        motorGainNode = webAudioCtx.createGain();
+
+        motorOscillator.type = 'sawtooth';
+        motorOscillator.frequency.setValueAtTime(80, webAudioCtx.currentTime);
+        motorGainNode.gain.setValueAtTime(0, webAudioCtx.currentTime);
+
+        motorOscillator.connect(motorGainNode);
+        motorGainNode.connect(webAudioCtx.destination);
+        motorOscillator.start();
+      } catch (e) {
+        console.warn('AudioContext not supported', e);
+      }
+    }
+
+    function updateMotorAudio(ratio) {
+      if (!webAudioCtx || !appState.sim.audioEnabled) return;
+      if (webAudioCtx.state === 'suspended') webAudioCtx.resume();
+
+      const freq = 80 + (ratio * 340);
+      const vol = Math.min(0.18, ratio * 0.18);
+      motorOscillator.frequency.setTargetAtTime(freq, webAudioCtx.currentTime, 0.05);
+      motorGainNode.gain.setTargetAtTime(vol, webAudioCtx.currentTime, 0.05);
+    }
+
+    function toggleAudio() {
+      appState.sim.audioEnabled = !appState.sim.audioEnabled;
+      const icon = document.getElementById('icon-audio');
+      if (icon) {
+        icon.className = appState.sim.audioEnabled ? 'w-4 h-4 text-cyan-400' : 'w-4 h-4 text-slate-500';
+      }
+      if (!appState.sim.audioEnabled && motorGainNode && webAudioCtx) {
+        motorGainNode.gain.setValueAtTime(0, webAudioCtx.currentTime);
+      }
+    }
+
+    function playAudioFeedback(type = 'snap') {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.connect(g);
+        g.connect(ctx.destination);
+
+        if (type === 'snap') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+          g.gain.setValueAtTime(0.15, ctx.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587, ctx.currentTime);
+          osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
+          g.gain.setValueAtTime(0.2, ctx.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+        }
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+      } catch (e) {}
+    }
+
+    function toggleAppFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    /* -------------------------------------------------------------
+       SCENE 1: FLIGHT PHYSICS (AERODYNAMICS & ATTITUDE)
+       ------------------------------------------------------------- */
+    let physScene, physCamera, physRenderer, physDroneGroup;
+    let physPropellers = [];
+
+    function initPhysicsScene() {
+      const container = document.getElementById('physics-canvas-container');
+      if (!container || physScene) return;
+
+      physScene = new THREE.Scene();
+      physScene.background = new THREE.Color(0x050811);
+
+      const w = container.clientWidth || 600;
+      const h = container.clientHeight || 480;
+
+      physCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+      physCamera.position.set(0, 1.8, 3.2);
+      physCamera.lookAt(0, 0, 0);
+
+      physRenderer = new THREE.WebGLRenderer({ antialias: true });
+      physRenderer.setSize(w, h);
+      physRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(physRenderer.domElement);
+
+      physScene.add(new THREE.AmbientLight(0xffffff, 0.7));
+      const light = new THREE.DirectionalLight(0x38bdf8, 1.3);
+      light.position.set(5, 10, 7);
+      physScene.add(light);
+
+      const grid = new THREE.GridHelper(8, 16, 0x0ea5e9, 0x1e293b);
+      grid.position.y = -0.6;
+      physScene.add(grid);
+
+      physDroneGroup = new THREE.Group();
+      physScene.add(physDroneGroup);
+
+      // Chassis
+      const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.3, metalness: 0.8 });
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.6), bodyMat);
+      physDroneGroup.add(body);
+
+      // Arms
+      const armMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.5, metalness: 0.5 });
+      const a1 = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.04, 0.07), armMat);
+      a1.rotation.y = Math.PI / 4;
+      const a2 = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.04, 0.07), armMat);
+      a2.rotation.y = -Math.PI / 4;
+      physDroneGroup.add(a1, a2);
+
+      // Motors & Props
+      physPropellers = [];
+      const mPositions = [
+        { x: 0.56, z: 0.56, cw: true },   // M1 Rear-R
+        { x: 0.56, z: -0.56, cw: false }, // M2 Front-R
+        { x: -0.56, z: 0.56, cw: false }, // M3 Rear-L
+        { x: -0.56, z: -0.56, cw: true }  // M4 Front-L
+      ];
+
+      const motorMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.9, roughness: 0.2 });
+      const propMat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.85 });
+
+      mPositions.forEach((pos) => {
+        const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.08, 16), motorMat);
+        motor.position.set(pos.x, 0.06, pos.z);
+        physDroneGroup.add(motor);
+
+        const prop = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.01, 0.05), propMat);
+        prop.position.set(pos.x, 0.12, pos.z);
+        physDroneGroup.add(prop);
+        physPropellers.push({ mesh: prop, cw: pos.cw });
+      });
+
+      // Mouse drag rotation
+      let dragging = false;
+      let prev = { x: 0, y: 0 };
+      container.addEventListener('mousedown', (e) => {
+        dragging = true;
+        prev = { x: e.clientX, y: e.clientY };
+      });
+      window.addEventListener('mouseup', () => { dragging = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - prev.x;
+        const dy = e.clientY - prev.y;
+        physDroneGroup.rotation.y += dx * 0.01;
+        physDroneGroup.rotation.x += dy * 0.01;
+        prev = { x: e.clientX, y: e.clientY };
+      });
+
+      renderPhysicsLoop();
+    }
+
+    function renderPhysicsLoop() {
+      requestAnimationFrame(renderPhysicsLoop);
+      if (appState.activeTab !== 'physics') return;
+
+      const baseSpeed = (appState.physics.throttle / 100) * 0.5;
+      physPropellers.forEach((p) => {
+        const dir = p.cw ? 1 : -1;
+        p.mesh.rotation.y += (baseSpeed + 0.05) * dir;
+      });
+
+      physRenderer.render(physScene, physCamera);
+    }
+
+    function onPhysicsInputChange() {
+      appState.physics.throttle = parseFloat(document.getElementById('input-thr').value);
+      appState.physics.pitch = parseFloat(document.getElementById('input-pitch').value);
+      appState.physics.roll = parseFloat(document.getElementById('input-roll').value);
+      appState.physics.yaw = parseFloat(document.getElementById('input-yaw').value);
+
+      document.getElementById('lbl-thr').innerText = `${appState.physics.throttle}%`;
+      document.getElementById('lbl-pitch').innerText = `${appState.physics.pitch}°`;
+      document.getElementById('lbl-roll').innerText = `${appState.physics.roll}°`;
+      document.getElementById('lbl-yaw').innerText = `${appState.physics.yaw}`;
+
+      const liftN = ((appState.physics.throttle / 100) * 11.76).toFixed(2);
+      document.getElementById('phys-hud-thrust').innerText = `${liftN} N`;
+      document.getElementById('phys-hud-pitch').innerText = `${appState.physics.pitch.toFixed(1)}°`;
+      document.getElementById('phys-hud-roll').innerText = `${appState.physics.roll.toFixed(1)}°`;
+      document.getElementById('phys-hud-yaw').innerText = `${appState.physics.yaw.toFixed(1)} °/s`;
+
+      if (physDroneGroup) {
+        physDroneGroup.rotation.x = THREE.MathUtils.degToRad(-appState.physics.pitch);
+        physDroneGroup.rotation.z = THREE.MathUtils.degToRad(-appState.physics.roll);
+      }
+
+      // Compute differential RPM
+      const baseRpm = 10000 + (appState.physics.throttle / 100) * 22000;
+      const pOff = (appState.physics.pitch / 30) * 4000;
+      const rOff = (appState.physics.roll / 30) * 4000;
+      const yOff = (appState.physics.yaw / 100) * 3000;
+
+      const m1 = Math.max(0, Math.round(baseRpm - pOff + rOff + yOff));
+      const m2 = Math.max(0, Math.round(baseRpm + pOff + rOff - yOff));
+      const m3 = Math.max(0, Math.round(baseRpm - pOff - rOff - yOff));
+      const m4 = Math.max(0, Math.round(baseRpm + pOff - rOff + yOff));
+
+      document.getElementById('val-m1-rpm').innerText = `${m1.toLocaleString()} RPM`;
+      document.getElementById('val-m2-rpm').innerText = `${m2.toLocaleString()} RPM`;
+      document.getElementById('val-m3-rpm').innerText = `${m3.toLocaleString()} RPM`;
+      document.getElementById('val-m4-rpm').innerText = `${m4.toLocaleString()} RPM`;
+
+      document.getElementById('val-m1-thrust').innerText = `${Math.round(m1 * 0.02)}g`;
+      document.getElementById('val-m2-thrust').innerText = `${Math.round(m2 * 0.02)}g`;
+      document.getElementById('val-m3-thrust').innerText = `${Math.round(m3 * 0.02)}g`;
+      document.getElementById('val-m4-thrust').innerText = `${Math.round(m4 * 0.02)}g`;
+    }
+
+    function applyPhysicsPreset(type) {
+      if (type === 'hover') {
+        document.getElementById('input-thr').value = 50;
+        document.getElementById('input-pitch').value = 0;
+        document.getElementById('input-roll').value = 0;
+        document.getElementById('input-yaw').value = 0;
+      } else if (type === 'pitch') {
+        document.getElementById('input-thr').value = 65;
+        document.getElementById('input-pitch').value = 22;
+        document.getElementById('input-roll').value = 0;
+        document.getElementById('input-yaw').value = 0;
+      } else if (type === 'roll') {
+        document.getElementById('input-thr').value = 60;
+        document.getElementById('input-pitch').value = 0;
+        document.getElementById('input-roll').value = 25;
+        document.getElementById('input-yaw').value = 0;
+      } else if (type === 'yaw') {
+        document.getElementById('input-thr').value = 50;
+        document.getElementById('input-pitch').value = 0;
+        document.getElementById('input-roll').value = 0;
+        document.getElementById('input-yaw').value = 75;
+      }
+      onPhysicsInputChange();
+    }
+
+    /* -------------------------------------------------------------
+       SCENE 2: PARAMETRIC CAD & EXPLODED PROJECTION
+       ------------------------------------------------------------- */
+    let cadScene, cadCamera, cadRenderer, cadDroneRoot;
+    let cadExplodeElements = [];
+
+    function initCADScene() {
+      const container = document.getElementById('cad-canvas-container');
+      if (!container || cadScene) return;
+
+      cadScene = new THREE.Scene();
+      cadScene.background = new THREE.Color(0x050812);
+
+      const w = container.clientWidth || 600;
+      const h = container.clientHeight || 480;
+
+      cadCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+      cadCamera.position.set(0, 1.5, 2.8);
+      cadCamera.lookAt(0, 0, 0);
+
+      cadRenderer = new THREE.WebGLRenderer({ antialias: true });
+      cadRenderer.setSize(w, h);
+      cadRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(cadRenderer.domElement);
+
+      cadScene.add(new THREE.AmbientLight(0xffffff, 0.8));
+      const light = new THREE.DirectionalLight(0x38bdf8, 1.4);
+      light.position.set(5, 8, 5);
+      cadScene.add(light);
+
+      const grid = new THREE.GridHelper(6, 12, 0x38bdf8, 0x1e293b);
+      grid.position.y = -0.5;
+      cadScene.add(grid);
+
+      reconstructCADDrone();
+
+      let dragging = false;
+      let prev = { x: 0, y: 0 };
+      container.addEventListener('mousedown', (e) => {
+        dragging = true;
+        prev = { x: e.clientX, y: e.clientY };
+      });
+      window.addEventListener('mouseup', () => { dragging = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!dragging || !cadDroneRoot) return;
+        const dx = e.clientX - prev.x;
+        const dy = e.clientY - prev.y;
+        cadDroneRoot.rotation.y += dx * 0.01;
+        cadDroneRoot.rotation.x += dy * 0.01;
+        prev = { x: e.clientX, y: e.clientY };
+      });
+
+      renderCADLoop();
+    }
+
+    function renderCADLoop() {
+      requestAnimationFrame(renderCADLoop);
+      if (appState.activeTab !== 'cad') return;
+      cadRenderer.render(cadScene, cadCamera);
+    }
+
+    function reconstructCADDrone() {
+      if (cadDroneRoot) cadScene.remove(cadDroneRoot);
+      cadDroneRoot = new THREE.Group();
+      cadScene.add(cadDroneRoot);
+      cadExplodeElements = [];
+
+      appState.cad.shape = document.getElementById('cad-select-shape').value;
+      appState.cad.wheelbase = parseFloat(document.getElementById('cad-input-wheelbase').value);
+      appState.cad.weight = parseFloat(document.getElementById('cad-input-weight').value);
+
+      document.getElementById('cad-lbl-wheelbase').innerText = `${appState.cad.wheelbase} mm`;
+      document.getElementById('cad-lbl-weight').innerText = `${appState.cad.weight} g`;
+
+      const motorCount = appState.cad.shape === 'hex_x' ? 6 : 4;
+      document.getElementById('cad-res-hover').innerText = `${Math.round(appState.cad.weight / motorCount)} g`;
+
+      if (appState.cad.wheelbase < 100) {
+        document.getElementById('cad-res-prop').innerText = '31mm - 40mm Micro';
+      } else if (appState.cad.wheelbase < 160) {
+        document.getElementById('cad-res-prop').innerText = '3.0" - 3.5" Props';
+      } else if (appState.cad.wheelbase < 250) {
+        document.getElementById('cad-res-prop').innerText = '5.0" - 5.1" Props';
+      } else {
+        document.getElementById('cad-res-prop').innerText = '7.0" - 9.0" Heavy-Lift';
+      }
+
+      const scale = appState.cad.wheelbase / 220;
+      const carbonMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.6 });
+      const motorMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.2, metalness: 0.9 });
+      const propMat = new THREE.MeshStandardMaterial({ color: 0x10b981, transparent: true, opacity: 0.85 });
+
+      // Lower Base Plate
+      const basePlate = new THREE.Mesh(new THREE.BoxGeometry(0.35 * scale, 0.02, 0.7 * scale), carbonMat);
+      cadDroneRoot.add(basePlate);
+      cadExplodeElements.push({ obj: basePlate, baseY: 0, mult: 0 });
+
+      // Arms
+      const armGeo = new THREE.BoxGeometry(1.6 * scale, 0.03, 0.08 * scale);
+      if (appState.cad.shape === 'hex_x') {
+        for (let i = 0; i < 3; i++) {
+          const arm = new THREE.Mesh(armGeo, carbonMat);
+          arm.rotation.y = (i * Math.PI) / 3;
+          cadDroneRoot.add(arm);
+          cadExplodeElements.push({ obj: arm, baseY: 0, mult: 0 });
+        }
+      } else {
+        const arm1 = new THREE.Mesh(armGeo, carbonMat);
+        arm1.rotation.y = Math.PI / 4;
+        const arm2 = new THREE.Mesh(armGeo, carbonMat);
+        arm2.rotation.y = -Math.PI / 4;
+        cadDroneRoot.add(arm1, arm2);
+        cadExplodeElements.push({ obj: arm1, baseY: 0, mult: 0 }, { obj: arm2, baseY: 0, mult: 0 });
+      }
+
+      // ESC
+      const esc = new THREE.Mesh(new THREE.BoxGeometry(0.25 * scale, 0.02, 0.25 * scale), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
+      esc.position.y = 0.05;
+      cadDroneRoot.add(esc);
+      cadExplodeElements.push({ obj: esc, baseY: 0.05, mult: 0.3 });
+
+      // Flight Controller
+      const fc = new THREE.Mesh(new THREE.BoxGeometry(0.25 * scale, 0.02, 0.25 * scale), new THREE.MeshStandardMaterial({ color: 0x059669 }));
+      fc.position.y = 0.12;
+      cadDroneRoot.add(fc);
+      cadExplodeElements.push({ obj: fc, baseY: 0.12, mult: 0.6 });
+
+      // Top Plate
+      const topPlate = new THREE.Mesh(new THREE.BoxGeometry(0.3 * scale, 0.02, 0.65 * scale), carbonMat);
+      topPlate.position.y = 0.22;
+      cadDroneRoot.add(topPlate);
+      cadExplodeElements.push({ obj: topPlate, baseY: 0.22, mult: 1.0 });
+
+      // LiPo Battery
+      const lipo = new THREE.Mesh(new THREE.BoxGeometry(0.22 * scale, 0.14 * scale, 0.45 * scale), new THREE.MeshStandardMaterial({ color: 0xdc2626 }));
+      lipo.position.y = 0.35;
+      cadDroneRoot.add(lipo);
+      cadExplodeElements.push({ obj: lipo, baseY: 0.35, mult: 1.5 });
+
+      // Motors and Props
+      const armSpan = 0.58 * scale;
+      const coords = [
+        { x: armSpan, z: armSpan },
+        { x: armSpan, z: -armSpan },
+        { x: -armSpan, z: armSpan },
+        { x: -armSpan, z: -armSpan }
+      ];
+
+      coords.forEach((c) => {
+        const m = new THREE.Mesh(new THREE.CylinderGeometry(0.06 * scale, 0.06 * scale, 0.08 * scale, 16), motorMat);
+        m.position.set(c.x, 0.05, c.z);
+        cadDroneRoot.add(m);
+        cadExplodeElements.push({ obj: m, baseY: 0.05, mult: 0.4 });
+
+        const p = new THREE.Mesh(new THREE.BoxGeometry(0.48 * scale, 0.01, 0.04 * scale), propMat);
+        p.position.set(c.x, 0.12, c.z);
+        cadDroneRoot.add(p);
+        cadExplodeElements.push({ obj: p, baseY: 0.12, mult: 1.8 });
+      });
+
+      onCADExplodeChange(document.getElementById('cad-slider-explode').value);
+    }
+
+    function onCADExplodeChange(val) {
+      appState.cad.explodedPct = parseFloat(val);
+      document.getElementById('cad-lbl-explode').innerText = `${val}% ${val > 50 ? '(Projected)' : '(Compact)'}`;
+
+      const gap = (appState.cad.explodedPct / 100) * 0.6;
+      cadExplodeElements.forEach((el) => {
+        el.obj.position.y = el.baseY + (el.mult * gap);
+      });
+
+      const box = document.getElementById('cad-inspector-box');
+      if (appState.cad.explodedPct > 70) {
+        box.innerHTML = `
+          <div class="text-cyan-300 font-bold">100% Exploded View Active:</div>
+          <div>• Top: 6S 1300mAh LiPo & Carbon Top Deck</div>
+          <div>• Core: F722 FC & 55A 4-in-1 ESC Stack</div>
+          <div>• Base: 3K Carbon Arms & 2207 Motors</div>
+        `;
+      } else if (appState.cad.explodedPct > 20) {
+        box.innerHTML = `
+          <div class="text-emerald-300 font-bold">Sub-Assemblies Projected:</div>
+          <div>Internal electronics and flight stack separated from carbon arms.</div>
+        `;
+      } else {
+        box.innerHTML = `
+          <div class="text-slate-300 font-bold">Compact Assembled Airframe</div>
+          <div>Drag slider to project components in 3D.</div>
+        `;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       SCENE 3: 3D STEP-BY-STEP WORKSHOP & PARTS TRAY
+       ------------------------------------------------------------- */
+    let assemblerScene, assemblerCamera, assemblerRenderer, assemblerDroneRoot;
+    let assemblerMeshMap = {};
+
+    function initAssemblerScene() {
+      const container = document.getElementById('assembler-canvas-container');
+      if (!container || assemblerScene) return;
+
+      assemblerScene = new THREE.Scene();
+      assemblerScene.background = new THREE.Color(0x050813);
+
+      const w = container.clientWidth || 600;
+      const h = container.clientHeight || 480;
+
+      assemblerCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+      assemblerCamera.position.set(0, 1.4, 2.6);
+      assemblerCamera.lookAt(0, 0, 0);
+
+      assemblerRenderer = new THREE.WebGLRenderer({ antialias: true });
+      assemblerRenderer.setSize(w, h);
+      assemblerRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(assemblerRenderer.domElement);
+
+      assemblerScene.add(new THREE.AmbientLight(0xffffff, 0.8));
+      const light = new THREE.DirectionalLight(0x06b6d4, 1.4);
+      light.position.set(4, 8, 4);
+      assemblerScene.add(light);
+
+      const grid = new THREE.GridHelper(6, 12, 0x06b6d4, 0x1e293b);
+      grid.position.y = -0.4;
+      assemblerScene.add(grid);
+
+      assemblerDroneRoot = new THREE.Group();
+      assemblerScene.add(assemblerDroneRoot);
+
+      buildWorkshopMeshes();
+      renderWorkshopTray();
+      refreshAssemblerVisuals();
+
+      let dragging = false;
+      let prev = { x: 0, y: 0 };
+      container.addEventListener('mousedown', (e) => {
+        dragging = true;
+        prev = { x: e.clientX, y: e.clientY };
+      });
+      window.addEventListener('mouseup', () => { dragging = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!dragging || !assemblerDroneRoot) return;
+        const dx = e.clientX - prev.x;
+        const dy = e.clientY - prev.y;
+        assemblerDroneRoot.rotation.y += dx * 0.01;
+        assemblerDroneRoot.rotation.x += dy * 0.01;
+        prev = { x: e.clientX, y: e.clientY };
+      });
+
+      renderAssemblerLoop();
+    }
+
+    function renderAssemblerLoop() {
+      requestAnimationFrame(renderAssemblerLoop);
+      if (appState.activeTab !== 'builder') return;
+      assemblerRenderer.render(assemblerScene, assemblerCamera);
+    }
+
+    function buildWorkshopMeshes() {
+      const carbonMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.6 });
+      const motorMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.2, metalness: 0.9 });
+      const propMat = new THREE.MeshStandardMaterial({ color: 0x10b981, transparent: true, opacity: 0.85 });
+      const standoffMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9 });
+
+      // 1. Frame
+      const frameGroup = new THREE.Group();
+      const base = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.02, 0.65), carbonMat);
+      const a1 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.03, 0.08), carbonMat);
+      a1.rotation.y = Math.PI / 4;
+      const a2 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.03, 0.08), carbonMat);
+      a2.rotation.y = -Math.PI / 4;
+      frameGroup.add(base, a1, a2);
+      assemblerDroneRoot.add(frameGroup);
+      assemblerMeshMap['frame'] = frameGroup;
+
+      // 2. Standoffs
+      const stGroup = new THREE.Group();
+      const stCoords = [{ x: 0.12, z: 0.22 }, { x: -0.12, z: 0.22 }, { x: 0.12, z: -0.22 }, { x: -0.12, z: -0.22 }];
+      stCoords.forEach(c => {
+        const s = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.2, 12), standoffMat);
+        s.position.set(c.x, 0.1, c.z);
+        stGroup.add(s);
+      });
+      assemblerDroneRoot.add(stGroup);
+      assemblerMeshMap['standoffs'] = stGroup;
+
+      // 3. Motors
+      const mGroup = new THREE.Group();
+      const mCoords = [{ x: 0.54, z: 0.54 }, { x: 0.54, z: -0.54 }, { x: -0.54, z: 0.54 }, { x: -0.54, z: -0.54 }];
+      mCoords.forEach(c => {
+        const m = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.08, 16), motorMat);
+        m.position.set(c.x, 0.05, c.z);
+        mGroup.add(m);
+      });
+      assemblerDroneRoot.add(mGroup);
+      assemblerMeshMap['motors'] = mGroup;
+
+      // 4. ESC
+      const escGroup = new THREE.Group();
+      const esc = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.02, 0.25), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
+      esc.position.y = 0.04;
+      const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.07, 12), new THREE.MeshStandardMaterial({ color: 0x000000 }));
+      cap.rotation.z = Math.PI / 2;
+      cap.position.set(0, 0.05, 0.15);
+      escGroup.add(esc, cap);
+      assemblerDroneRoot.add(escGroup);
+      assemblerMeshMap['esc'] = escGroup;
+
+      // 5. FC
+      const fcGroup = new THREE.Group();
+      const fc = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.02, 0.24), new THREE.MeshStandardMaterial({ color: 0x059669 }));
+      fc.position.y = 0.12;
+      fcGroup.add(fc);
+      assemblerDroneRoot.add(fcGroup);
+      assemblerMeshMap['fc'] = fcGroup;
+
+      // 6. Camera
+      const camGroup = new THREE.Group();
+      const cam = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.1), new THREE.MeshStandardMaterial({ color: 0xd97706 }));
+      cam.position.set(0, 0.11, -0.32);
+      camGroup.add(cam);
+      assemblerDroneRoot.add(camGroup);
+      assemblerMeshMap['camera'] = camGroup;
+
+      // 7. Receiver
+      const rxGroup = new THREE.Group();
+      const rx = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.015, 0.12), new THREE.MeshStandardMaterial({ color: 0x9333ea }));
+      rx.position.set(0, 0.08, 0.24);
+      rxGroup.add(rx);
+      assemblerDroneRoot.add(rxGroup);
+      assemblerMeshMap['rx'] = rxGroup;
+
+      // 8. Top Plate
+      const topGroup = new THREE.Group();
+      const topP = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.02, 0.6), carbonMat);
+      topP.position.y = 0.2;
+      topGroup.add(topP);
+      assemblerDroneRoot.add(topGroup);
+      assemblerMeshMap['topplate'] = topGroup;
+
+      // 9. Propellers
+      const propGroup = new THREE.Group();
+      mCoords.forEach(c => {
+        const p = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.01, 0.04), propMat);
+        p.position.set(c.x, 0.1, c.z);
+        propGroup.add(p);
+      });
+      assemblerDroneRoot.add(propGroup);
+      assemblerMeshMap['props'] = propGroup;
+    }
+
+    function renderWorkshopTray() {
+      const container = document.getElementById('parts-tray-container');
+      if (!container) return;
+
+      container.innerHTML = REQUIRED_HARDWARE_PARTS.map((part, idx) => {
+        const isMounted = appState.workshop.mounted[idx];
+        return `
+          <div onclick="toggleComponentMount(${idx})" class="cursor-pointer p-3 rounded-xl border transition-all ${
+            isMounted 
+              ? 'bg-cyan-950/30 border-cyan-700/60 shadow-sm' 
+              : 'bg-slate-900/60 border-slate-800 opacity-60 hover:opacity-90'
+          }">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full ${isMounted ? 'bg-cyan-500 text-black' : 'bg-slate-800 text-slate-400'} flex items-center justify-center font-bold text-[10px] font-mono">
+                  ${part.step}
+                </span>
+                <span class="font-bold text-xs text-white">${part.name}</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
+                isMounted ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-slate-800 text-slate-400'
+              }">
+                ${isMounted ? 'MOUNTED' : 'UNMOUNTED'}
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">${part.sub}</div>
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 pt-1 border-t border-slate-800/80">
+              <span>Weight: +${part.weight}g</span>
+              <span>Tool: ${part.tool}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function refreshAssemblerVisuals() {
+      let weight = 0;
+      let count = 0;
+
+      REQUIRED_HARDWARE_PARTS.forEach((part, idx) => {
+        const isMounted = appState.workshop.mounted[idx];
+        if (assemblerMeshMap[part.id]) {
+          assemblerMeshMap[part.id].visible = isMounted;
+        }
+        if (isMounted) {
+          weight += part.weight;
+          count++;
+        }
+      });
+
+      document.getElementById('bench-lbl-weight').innerText = `${weight} g`;
+      document.getElementById('bench-lbl-count').innerText = `${count} / 9 Mounted`;
+      document.getElementById('shelf-counter').innerText = `${count} / 9 Installed`;
+
+      renderWorkshopTray();
+
+      const nextIdx = appState.workshop.mounted.findIndex(m => !m);
+      if (nextIdx !== -1) {
+        const p = REQUIRED_HARDWARE_PARTS[nextIdx];
+        document.getElementById('step-badge').innerHTML = `<i data-lucide="wrench" class="w-4 h-4"></i> Step ${p.step} of 9`;
+        document.getElementById('step-tool-badge').innerText = `Tool: ${p.tool}`;
+        document.getElementById('step-title').innerText = `Mount ${p.name}`;
+        document.getElementById('step-desc').innerText = p.desc;
+      } else {
+        document.getElementById('step-badge').innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Assembly 100% Complete`;
+        document.getElementById('step-tool-badge').innerText = 'Ready for Flight';
+        document.getElementById('step-title').innerText = 'All 9 Components Installed!';
+        document.getElementById('step-desc').innerText = 'All structural and propulsion hardware mounted. Ready to pilot in the Flight Arena.';
+      }
+      lucide.createIcons();
+    }
+
+    function toggleComponentMount(idx) {
+      appState.workshop.mounted[idx] = !appState.workshop.mounted[idx];
+      playAudioFeedback('snap');
+      refreshAssemblerVisuals();
+    }
+
+    function mountNextComponent() {
+      const nextIdx = appState.workshop.mounted.findIndex(m => !m);
+      if (nextIdx !== -1) {
+        appState.workshop.mounted[nextIdx] = true;
+        playAudioFeedback('snap');
+        refreshAssemblerVisuals();
+      }
+    }
+
+    function mountAllComponents() {
+      appState.workshop.mounted = appState.workshop.mounted.map(() => true);
+      playAudioFeedback('success');
+      refreshAssemblerVisuals();
+    }
+
+    function disassembleAllComponents() {
+      appState.workshop.mounted = appState.workshop.mounted.map(() => false);
+      playAudioFeedback('snap');
+      refreshAssemblerVisuals();
+    }
+
+    /* -------------------------------------------------------------
+       SCENE 4: 3D MAIDEN FLIGHT ARENA (PILOT YOUR BUILD)
+       ------------------------------------------------------------- */
+    let simScene, simCamera, simRenderer, simDroneModelGroup;
+    let simNeonGates = [];
+    let simDeltaClock = new THREE.Clock();
+
+    function initFlightArenaScene() {
+      const container = document.getElementById('sim-canvas-container');
+      if (!container || simScene) return;
+
+      simScene = new THREE.Scene();
+      simScene.background = new THREE.Color(0x040711);
+      simScene.fog = new THREE.FogExp2(0x040711, 0.015);
+
+      const w = container.clientWidth || 600;
+      const h = container.clientHeight || 500;
+
+      simCamera = new THREE.PerspectiveCamera(50, w / h, 0.1, 250);
+      simCamera.position.set(0, 1.5, 3.5);
+
+      simRenderer = new THREE.WebGLRenderer({ antialias: true });
+      simRenderer.setSize(w, h);
+      simRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(simRenderer.domElement);
+
+      simScene.add(new THREE.AmbientLight(0xffffff, 0.7));
+      const sun = new THREE.DirectionalLight(0x38bdf8, 1.4);
+      sun.position.set(20, 40, 20);
+      simScene.add(sun);
+
+      // Runway
+      const runwayMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+      const runway = new THREE.Mesh(new THREE.PlaneGeometry(12, 120), runwayMat);
+      runway.rotation.x = -Math.PI / 2;
+      simScene.add(runway);
+
+      // Grass
+      const ground = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.MeshStandardMaterial({ color: 0x061510 }));
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -0.01;
+      simScene.add(ground);
+
+      const grid = new THREE.GridHelper(120, 60, 0x0ea5e9, 0x0f172a);
+      simScene.add(grid);
+
+      // 5 Neon Racing Gates
+      simNeonGates = [];
+      const gatePositions = [
+        new THREE.Vector3(0, 2.5, -12),
+        new THREE.Vector3(6, 3.5, -28),
+        new THREE.Vector3(-6, 4.0, -45),
+        new THREE.Vector3(4, 3.0, -65),
+        new THREE.Vector3(0, 2.5, -85)
+      ];
+
+      gatePositions.forEach((pos) => {
+        const gGroup = new THREE.Group();
+        gGroup.position.copy(pos);
+
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(2.2, 0.08, 12, 32),
+          new THREE.MeshStandardMaterial({ color: 0x06b6d4, emissive: 0x06b6d4, emissiveIntensity: 0.8, metalness: 0.9 })
+        );
+        gGroup.add(ring);
+        simScene.add(gGroup);
+        simNeonGates.push({ group: gGroup, mesh: ring, passed: false });
+      });
+
+      simDroneModelGroup = new THREE.Group();
+      simScene.add(simDroneModelGroup);
+      rebuildSimDroneFromWorkshop();
+
+      setupFlightInputListeners();
+      renderFlightArenaLoop();
+    }
+
+    function rebuildSimDroneFromWorkshop() {
+      if (!simDroneModelGroup) return;
+      while (simDroneModelGroup.children.length > 0) {
+        simDroneModelGroup.remove(simDroneModelGroup.children[0]);
+      }
+
+      const carbonMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.6 });
+      const motorMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.2, metalness: 0.9 });
+      const propMat = new THREE.MeshStandardMaterial({ color: 0x10b981, transparent: true, opacity: 0.85 });
+
+      // Frame
+      if (appState.workshop.mounted[0]) {
+        const b = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.02, 0.65), carbonMat);
+        const a1 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.03, 0.08), carbonMat);
+        a1.rotation.y = Math.PI / 4;
+        const a2 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.03, 0.08), carbonMat);
+        a2.rotation.y = -Math.PI / 4;
+        simDroneModelGroup.add(b, a1, a2);
+      }
+
+      // Motors
+      if (appState.workshop.mounted[2]) {
+        const mCoords = [{ x: 0.54, z: 0.54 }, { x: 0.54, z: -0.54 }, { x: -0.54, z: 0.54 }, { x: -0.54, z: -0.54 }];
+        mCoords.forEach(c => {
+          const m = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.08, 16), motorMat);
+          m.position.set(c.x, 0.05, c.z);
+          simDroneModelGroup.add(m);
+        });
+      }
+
+      // Props
+      if (appState.workshop.mounted[8]) {
+        const pCoords = [{ x: 0.54, z: 0.54 }, { x: 0.54, z: -0.54 }, { x: -0.54, z: 0.54 }, { x: -0.54, z: -0.54 }];
+        pCoords.forEach(c => {
+          const p = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.01, 0.04), propMat);
+          p.position.set(c.x, 0.1, c.z);
+          simDroneModelGroup.add(p);
+        });
+      }
+
+      // Top Plate
+      if (appState.workshop.mounted[7]) {
+        const tp = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.02, 0.6), carbonMat);
+        tp.position.y = 0.18;
+        simDroneModelGroup.add(tp);
+      }
+
+      refreshSimHUDChecklist();
+    }
+
+    function refreshSimHUDChecklist() {
+      const count = appState.workshop.mounted.filter(Boolean).length;
+      document.getElementById('sim-status-parts-count').innerText = `${count} / 9`;
+      document.getElementById('chase-val-parts').innerText = `${count} / 9 Parts`;
+
+      const banner = document.getElementById('sim-missing-parts-banner');
+      const hasMotors = appState.workshop.mounted[2];
+      const hasProps = appState.workshop.mounted[8];
+      const hasFC = appState.workshop.mounted[4];
+
+      if (!hasMotors || !hasProps || !hasFC) {
+        banner.classList.remove('hidden');
+        document.getElementById('sim-missing-parts-desc').innerText = 
+          !hasProps ? 'Propellers missing: Flight thrust disabled.' : 'Motors or FC unmounted. Build incomplete.';
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      const miniList = document.getElementById('sim-parts-list-mini');
+      if (miniList) {
+        miniList.innerHTML = REQUIRED_HARDWARE_PARTS.slice(0, 5).map((p, idx) => {
+          const ok = appState.workshop.mounted[idx];
+          return `
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-slate-400 truncate max-w-[120px]">${p.name}</span>
+              <span class="${ok ? 'text-emerald-400' : 'text-amber-500'} font-bold">${ok ? '✓' : 'MISSING'}</span>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function updateSimPhysics(delta) {
+      const keys = appState.sim.keys;
+      const tIn = appState.sim.touchInput;
+      const hasProps = appState.workshop.mounted[8];
+      const hasMotors = appState.workshop.mounted[2];
+      const canThrust = hasProps && hasMotors;
+
+      // Throttle (Keyboard Space/Shift OR Left Virtual Stick Y)
+      let throttleDemand = 0;
+      if (keys[' '] || keys['space']) throttleDemand += 1;
+      if (keys['shift']) throttleDemand -= 1;
+      if (Math.abs(tIn.throttleSpeed) > 0.05) throttleDemand += tIn.throttleSpeed;
+
+      if (throttleDemand !== 0) {
+        appState.sim.throttle = Math.max(0, Math.min(100, appState.sim.throttle + throttleDemand * delta * 55));
+        initWebAudio();
+      }
+
+      // Pitch, Roll, Yaw (Keyboard + Right/Left Virtual Sticks)
+      const pitchIn = ((keys['w'] ? 1 : 0) - (keys['s'] ? 1 : 0)) + tIn.pitch;
+      const rollIn = ((keys['d'] ? 1 : 0) - (keys['a'] ? 1 : 0)) + tIn.roll;
+      const yawIn = ((keys['q'] ? 1 : 0) - (keys['e'] ? 1 : 0)) + tIn.yaw;
+
+      const massKg = 0.68;
+      const maxThrustN = canThrust ? massKg * 9.81 * 3.5 : 0;
+      const currentThrustN = (appState.sim.throttle / 100) * maxThrustN;
+
+      // Attitude
+      if (appState.sim.flightMode === 'angle') {
+        const targetPitch = Math.max(-0.6, Math.min(0.6, pitchIn * 0.45));
+        const targetRoll = Math.max(-0.6, Math.min(0.6, rollIn * 0.45));
+        appState.sim.rot.x += (targetPitch - appState.sim.rot.x) * 0.1;
+        appState.sim.rot.z += (-targetRoll - appState.sim.rot.z) * 0.1;
+      } else {
+        appState.sim.rot.x += pitchIn * delta * 2.5;
+        appState.sim.rot.z -= rollIn * delta * 2.5;
+      }
+      appState.sim.rot.y += yawIn * delta * 2.0;
+
+      // Vectors
+      const thrustVec = new THREE.Vector3(0, currentThrustN, 0).applyEuler(appState.sim.rot);
+      const gravity = new THREE.Vector3(0, -massKg * 9.81, 0);
+      const netForce = thrustVec.clone().add(gravity);
+
+      const accel = netForce.clone().divideScalar(massKg);
+      appState.sim.vel.add(accel.multiplyScalar(delta));
+      appState.sim.vel.multiplyScalar(0.985); // Aerodynamic drag
+
+      appState.sim.pos.add(appState.sim.vel.clone().multiplyScalar(delta));
+
+      // Ground plane collision
+      if (appState.sim.pos.y < 0.15) {
+        appState.sim.pos.y = 0.15;
+        appState.sim.vel.y = Math.max(0, appState.sim.vel.y);
+        appState.sim.vel.x *= 0.8;
+        appState.sim.vel.z *= 0.8;
+      }
+
+      // Sync drone mesh
+      if (simDroneModelGroup) {
+        simDroneModelGroup.position.copy(appState.sim.pos);
+        simDroneModelGroup.rotation.copy(appState.sim.rot);
+      }
+
+      // Camera sync
+      if (appState.sim.cameraMode === 'fpv') {
+        simCamera.position.copy(appState.sim.pos).add(new THREE.Vector3(0, 0.1, -0.2).applyEuler(appState.sim.rot));
+        simCamera.rotation.copy(appState.sim.rot);
+      } else {
+        const offset = new THREE.Vector3(0, 1.2, 3.2).applyEuler(new THREE.Euler(0, appState.sim.rot.y, 0));
+        simCamera.position.copy(appState.sim.pos).add(offset);
+        simCamera.lookAt(appState.sim.pos.clone().add(new THREE.Vector3(0, 0.4, 0)));
+      }
+
+      // Gate detection
+      simNeonGates.forEach((g, idx) => {
+        if (!g.passed) {
+          const d = appState.sim.pos.distanceTo(g.group.position);
+          if (d < 2.5) {
+            g.passed = true;
+            appState.sim.gatesPassed[idx] = true;
+            g.mesh.material.emissiveIntensity = 2.5;
+
+            if (navigator.vibrate) navigator.vibrate([40, 60, 40]); // Mobile haptic tap
+
+            const banner = document.getElementById('sim-gate-banner');
+            document.getElementById('sim-gate-banner-text').innerText = `GATE ${idx + 1} CLEARED! +100 PTS`;
+            banner.classList.remove('-translate-y-12', 'opacity-0');
+            setTimeout(() => banner.classList.add('-translate-y-12', 'opacity-0'), 2000);
+
+            const count = appState.sim.gatesPassed.filter(Boolean).length;
+            document.getElementById('chase-val-gates').innerText = `${count} / 5`;
+            document.getElementById('fpv-val-gates').innerText = `${count} / 5`;
+            playAudioFeedback('success');
+
+            const mGate = document.getElementById('mission-gate');
+            if (mGate) {
+              mGate.innerHTML = `<i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> <span class="text-emerald-300">Fly through Neon Gate 1 ✓</span>`;
+            }
+          }
+        }
+      });
+
+      updateMotorAudio(appState.sim.throttle / 100);
+      updateFlightSimHUD(delta, currentThrustN, maxThrustN);
+    }
+
+    function updateFlightSimHUD(delta, currentThrustN, maxThrustN) {
+      if (appState.sim.throttle > 5) {
+        appState.sim.flightTimeSec += delta;
+      }
+
+      const spdKmh = Math.round(new THREE.Vector3(appState.sim.vel.x, 0, appState.sim.vel.z).length() * 3.6);
+      const altM = Math.max(0, appState.sim.pos.y).toFixed(1);
+      const thrPct = Math.round(appState.sim.throttle);
+
+      document.getElementById('chase-val-speed').innerText = `${spdKmh} km/h`;
+      document.getElementById('chase-val-alt').innerText = `${altM} m`;
+      document.getElementById('chase-val-thr').innerText = `${thrPct}%`;
+
+      document.getElementById('fpv-val-speed').innerText = `${spdKmh} km/h`;
+      document.getElementById('fpv-val-alt').innerText = `${altM} m`;
+      document.getElementById('fpv-val-thr').innerText = `${thrPct}%`;
+
+      const m = Math.floor(appState.sim.flightTimeSec / 60).toString().padStart(2, '0');
+      const s = Math.floor(appState.sim.flightTimeSec % 60).toString().padStart(2, '0');
+      document.getElementById('fpv-val-time').innerText = `${m}:${s}`;
+
+      const horizon = document.getElementById('fpv-horizon-line');
+      if (horizon) {
+        const rollDeg = THREE.MathUtils.radToDeg(appState.sim.rot.z);
+        const pitchPx = THREE.MathUtils.radToDeg(appState.sim.rot.x) * 2.2;
+        horizon.style.transform = `translateY(${pitchPx}px) rotate(${-rollDeg}deg)`;
+      }
+
+      document.getElementById('sim-lbl-thrust').innerText = `${currentThrustN.toFixed(2)} N`;
+      document.getElementById('sim-thrust-progress').style.width = `${Math.min(100, (currentThrustN / (maxThrustN || 1)) * 100)}%`;
+
+      // Missions
+      if (appState.sim.pos.y > 1.8) {
+        document.getElementById('mission-takeoff').innerHTML = `<i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> <span class="text-emerald-300">Take off to 2m hover ✓</span>`;
+      }
+      if (spdKmh > 30) {
+        document.getElementById('mission-speed').innerHTML = `<i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> <span class="text-emerald-300">Reach 30 km/h flight speed ✓</span>`;
+      }
+      if (appState.sim.pos.y < 0.25 && spdKmh < 3 && appState.sim.flightTimeSec > 5) {
+        document.getElementById('mission-land').innerHTML = `<i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> <span class="text-emerald-300">Touch down gently on runway ✓</span>`;
+      }
+    }
+
+    function renderFlightArenaLoop() {
+      requestAnimationFrame(renderFlightArenaLoop);
+      const delta = Math.min(0.1, simDeltaClock.getDelta());
+      if (appState.activeTab === 'flight-arena') {
+        updateSimPhysics(delta);
+        simRenderer.render(simScene, simCamera);
+      }
+    }
+
+    function setupFlightInputListeners() {
+      window.addEventListener('keydown', (e) => {
+        appState.sim.keys[e.key.toLowerCase()] = true;
+        appState.sim.keys[e.code.toLowerCase()] = true;
+        if (e.key.toLowerCase() === 'r') resetSimPosition();
+        if (e.key.toLowerCase() === 'c') toggleCameraView();
+        if (e.key.toLowerCase() === 'm') toggleFlightMode();
+      });
+
+      window.addEventListener('keyup', (e) => {
+        appState.sim.keys[e.key.toLowerCase()] = false;
+        appState.sim.keys[e.code.toLowerCase()] = false;
+      });
+
+      setupTouchJoysticks();
+    }
+
+    function setupTouchJoysticks() {
+      const bindJoystick = (zoneId, thumbId, onMove, onRelease) => {
+        const zone = document.getElementById(zoneId);
+        const thumb = document.getElementById(thumbId);
+        if (!zone || !thumb) return;
+
+        const maxRadius = 38;
+        let activeTouchId = null;
+        let startPos = { x: 0, y: 0 };
+
+        const handleStart = (clientX, clientY, touchId = null) => {
+          activeTouchId = touchId;
+          const rect = zone.getBoundingClientRect();
+          startPos = {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+          };
+          initWebAudio();
+          handleMove(clientX, clientY);
+        };
+
+        const handleMove = (clientX, clientY) => {
+          const dx = clientX - startPos.x;
+          const dy = clientY - startPos.y;
+          const dist = Math.hypot(dx, dy);
+          const angle = Math.atan2(dy, dx);
+          const clampedDist = Math.min(maxRadius, dist);
+
+          const thumbX = Math.cos(angle) * clampedDist;
+          const thumbY = Math.sin(angle) * clampedDist;
+
+          thumb.style.transform = `translate(${thumbX}px, ${thumbY}px)`;
+
+          // Normalized values (-1 to +1)
+          const normX = thumbX / maxRadius;
+          const normY = -(thumbY / maxRadius); // Invert so Up is positive
+          onMove(normX, normY);
+        };
+
+        const handleEnd = () => {
+          activeTouchId = null;
+          thumb.style.transform = `translate(0px, 0px)`;
+          onRelease();
+        };
+
+        // Touch event handlers
+        zone.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          if (activeTouchId !== null) return;
+          const touch = e.changedTouches[0];
+          handleStart(touch.clientX, touch.clientY, touch.identifier);
+        }, { passive: false });
+
+        window.addEventListener('touchmove', (e) => {
+          if (activeTouchId === null) return;
+          for (let i = 0; i < e.changedTouches.length; i++) {
+            if (e.changedTouches[i].identifier === activeTouchId) {
+              e.preventDefault();
+              handleMove(e.changedTouches[i].clientX, e.changedTouches[i].clientY);
+              break;
+            }
+          }
+        }, { passive: false });
+
+        window.addEventListener('touchend', (e) => {
+          if (activeTouchId === null) return;
+          for (let i = 0; i < e.changedTouches.length; i++) {
+            if (e.changedTouches[i].identifier === activeTouchId) {
+              handleEnd();
+              break;
+            }
+          }
+        });
+
+        // Mouse pointer fallback for desktop testing
+        let mousePressed = false;
+        zone.addEventListener('mousedown', (e) => {
+          mousePressed = true;
+          handleStart(e.clientX, e.clientY);
+        });
+        window.addEventListener('mousemove', (e) => {
+          if (!mousePressed) return;
+          handleMove(e.clientX, e.clientY);
+        });
+        window.addEventListener('mouseup', () => {
+          if (mousePressed) {
+            mousePressed = false;
+            handleEnd();
+          }
+        });
+      };
+
+      // Left Stick: Throttle (Y) and Yaw (X)
+      bindJoystick('stick-left-zone', 'stick-left-thumb', (x, y) => {
+        appState.sim.touchInput.yaw = x * 1.2;
+        appState.sim.touchInput.throttleSpeed = y;
+      }, () => {
+        appState.sim.touchInput.yaw = 0;
+        appState.sim.touchInput.throttleSpeed = 0;
+      });
+
+      // Right Stick: Roll (X) and Pitch (Y)
+      bindJoystick('stick-right-zone', 'stick-right-thumb', (x, y) => {
+        appState.sim.touchInput.roll = x;
+        appState.sim.touchInput.pitch = y;
+      }, () => {
+        appState.sim.touchInput.roll = 0;
+        appState.sim.touchInput.pitch = 0;
+      });
+    }
+
+    function triggerVirtualKey(key, isPressed) {
+      initWebAudio();
+      appState.sim.keys[key.toLowerCase()] = isPressed;
+      if (key === 'Space') appState.sim.keys[' '] = isPressed;
+      if (key === 'Shift') appState.sim.keys['shift'] = isPressed;
+    }
+
+    function toggleFlightMode() {
+      appState.sim.flightMode = appState.sim.flightMode === 'angle' ? 'acro' : 'angle';
+      const btn = document.getElementById('btn-flight-mode');
+      const badge = document.getElementById('fpv-val-mode');
+      if (appState.sim.flightMode === 'angle') {
+        btn.innerHTML = `<i data-lucide="compass" class="w-3.5 h-3.5"></i> <span>Mode: Angle (Auto-Level)</span>`;
+        if (badge) badge.innerText = "ANGLE MODE";
+      } else {
+        btn.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i> <span>Mode: Acro (Freestyle 3D)</span>`;
+        if (badge) badge.innerText = "ACRO / RATE MODE";
+      }
+      lucide.createIcons();
+    }
+
+    function toggleCameraView() {
+      appState.sim.cameraMode = appState.sim.cameraMode === 'chase' ? 'fpv' : 'chase';
+      const label = document.getElementById('lbl-camera-view');
+      const fovHud = document.getElementById('sim-fpv-hud');
+      const chaseHud = document.getElementById('sim-chase-hud');
+
+      if (appState.sim.cameraMode === 'fpv') {
+        label.innerText = 'View: FPV Goggles (1st-Person)';
+        fovHud.classList.remove('hidden');
+        chaseHud.classList.add('hidden');
+      } else {
+        label.innerText = 'View: 3rd-Person Chase';
+        fovHud.classList.add('hidden');
+        chaseHud.classList.remove('hidden');
+      }
+    }
+
+    function resetSimPosition() {
+      appState.sim.pos.set(0, 0.15, 0);
+      appState.sim.vel.set(0, 0, 0);
+      appState.sim.rot.set(0, 0, 0);
+      appState.sim.throttle = 0;
+      appState.sim.flightTimeSec = 0;
+      appState.sim.gatesPassed = [false, false, false, false, false];
+
+      simNeonGates.forEach(g => {
+        g.passed = false;
+        g.mesh.material.emissiveIntensity = 0.8;
+      });
+
+      document.getElementById('chase-val-gates').innerText = "0 / 5";
+      document.getElementById('fpv-val-gates').innerText = "0 / 5";
+      updateMotorAudio(0);
+    }
+
+    /* -------------------------------------------------------------
+       SCENE 5: BOM & THRUST CALCULATOR
+       ------------------------------------------------------------- */
+    function recomputeBOM() {
+      const weight = parseFloat(document.getElementById('bom-slider-weight').value);
+      const thrust = parseFloat(document.getElementById('bom-slider-thrust').value);
+      const bat = parseFloat(document.getElementById('bom-slider-bat').value);
+
+      document.getElementById('bom-lbl-weight').innerText = `${weight} g`;
+      document.getElementById('bom-lbl-thrust').innerText = `${thrust} g`;
+      document.getElementById('bom-lbl-bat').innerText = `${bat} mAh`;
+
+      const totalThrust = thrust * 4;
+      const twRatio = (totalThrust / weight).toFixed(1);
+      const hoverThr = Math.round((weight / totalThrust) * 100);
+      const hoverAmps = (hoverThr / 100) * 45;
+      const hoverMins = ((bat / 1000) / hoverAmps * 60 * 0.8).toFixed(1);
+
+      document.getElementById('bom-res-tw').innerText = `${twRatio} : 1`;
+      document.getElementById('bom-res-hover').innerText = `${hoverThr}%`;
+      document.getElementById('bom-res-time').innerText = `${hoverMins} Mins`;
+    }
+
+    function applyBOMPreset(preset) {
+      if (preset === '5inch') {
+        document.getElementById('bom-slider-weight').value = 680;
+        document.getElementById('bom-slider-thrust').value = 1750;
+        document.getElementById('bom-slider-bat').value = 1300;
+      } else if (preset === '3inch') {
+        document.getElementById('bom-slider-weight').value = 240;
+        document.getElementById('bom-slider-thrust').value = 650;
+        document.getElementById('bom-slider-bat').value = 850;
+      } else if (preset === '7inch') {
+        document.getElementById('bom-slider-weight').value = 1350;
+        document.getElementById('bom-slider-thrust').value = 2600;
+        document.getElementById('bom-slider-bat').value = 3300;
+      } else if (preset === 'micro') {
+        document.getElementById('bom-slider-weight').value = 32;
+        document.getElementById('bom-slider-thrust').value = 38;
+        document.getElementById('bom-slider-bat').value = 300;
+      }
+      recomputeBOM();
+    }
+
+    /* -------------------------------------------------------------
+       SCENE 6: AI MENTOR CHAT
+       ------------------------------------------------------------- */
+    function handleChatInputKeyDown(e) {
+      if (e.key === 'Enter') sendUserChatMessage();
+    }
+
+    function sendUserChatMessage() {
+      const input = document.getElementById('mentor-chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('mentor-chat-messages');
+      container.innerHTML += `
+        <div class="flex gap-3 items-start justify-end">
+          <div class="bg-cyan-500 text-slate-950 font-medium rounded-2xl p-3 text-xs max-w-xl shadow">
+            ${text}
+          </div>
+        </div>
+      `;
+      input.value = '';
+
+      setTimeout(() => {
+        let reply = "That is an insightful drone engineering question! ";
+        const q = text.toLowerCase();
+        if (q.includes('physics') || q.includes('fly') || q.includes('lift')) {
+          reply += "Multirotors fly by accelerating air downwards through rotating airfoils (Newton's 3rd Law: F = -F). Pitch and roll are produced by spinning opposite motors at differential RPMs to redirect the thrust vector, while yaw is achieved by imbalancing CW vs CCW motor torque.";
+        } else if (q.includes('kv') || q.includes('motor')) {
+          reply += "Motor KV represents theoretical RPM per volt without load. A 1950KV motor on 6S LiPo (25.2V) spins ~49,000 RPM unconstrained. Lower KV (1300-1950) pairs with higher voltage (6S) for cool efficiency, while higher KV (2400-2750) is standard for 4S builds.";
+        } else if (q.includes('pid') || q.includes('tune')) {
+          reply += "The PID loop runs on the flight controller STM32 MCU. 'P' controls reaction stiffness to stick input, 'I' accumulates error to fight persistent wind drift, and 'D' dampens acceleration to eliminate high-speed oscillation and propwash.";
+        } else {
+          reply += "To build a dependable drone: 1) Verify continuity with a multimeter before plugging in the LiPo, 2) Keep propellers OFF on the bench, and 3) Ensure your ESC current rating provides at least 20% headroom over motor burst amperage.";
+        }
+
+        container.innerHTML += `
+          <div class="flex gap-3 items-start max-w-3xl">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 text-slate-950 flex items-center justify-center font-bold text-xs shrink-0 shadow">
+              AA
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 text-xs text-slate-200 leading-relaxed shadow">
+              ${reply}
+            </div>
+          </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+      }, 400);
+    }
+
+    /* -------------------------------------------------------------
+       APPLICATION NAVIGATION CONTROLLER
+       ------------------------------------------------------------- */
+    function switchAppTab(tabId) {
+      appState.activeTab = tabId;
+
+      document.querySelectorAll('.app-tab-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.dock-btn').forEach(btn => {
+        btn.classList.remove('bg-cyan-500', 'text-slate-950', 'font-bold');
+        btn.classList.add('text-slate-400');
+      });
+
+      const targetView = document.getElementById(`view-${tabId}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const activeBtn = document.getElementById(`dock-btn-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-400');
+        activeBtn.classList.add('bg-cyan-500', 'text-slate-950', 'font-bold');
+      }
+
+      // Refresh viewports
+      setTimeout(() => {
+        if (tabId === 'physics') {
+          initPhysicsScene();
+          if (physRenderer && physCamera) {
+            const c = document.getElementById('physics-canvas-container');
+            physRenderer.setSize(c.clientWidth, c.clientHeight);
+            physCamera.aspect = c.clientWidth / c.clientHeight;
+            physCamera.updateProjectionMatrix();
+          }
+        } else if (tabId === 'cad') {
+          initCADScene();
+          if (cadRenderer && cadCamera) {
+            const c = document.getElementById('cad-canvas-container');
+            cadRenderer.setSize(c.clientWidth, c.clientHeight);
+            cadCamera.aspect = c.clientWidth / c.clientHeight;
+            cadCamera.updateProjectionMatrix();
+          }
+        } else if (tabId === 'builder') {
+          initAssemblerScene();
+          if (assemblerRenderer && assemblerCamera) {
+            const c = document.getElementById('assembler-canvas-container');
+            assemblerRenderer.setSize(c.clientWidth, c.clientHeight);
+            assemblerCamera.aspect = c.clientWidth / c.clientHeight;
+            assemblerCamera.updateProjectionMatrix();
+          }
+        } else if (tabId === 'flight-arena') {
+          initFlightArenaScene();
+          rebuildSimDroneFromWorkshop();
+          if (simRenderer && simCamera) {
+            const c = document.getElementById('sim-canvas-container');
+            simRenderer.setSize(c.clientWidth, c.clientHeight);
+            simCamera.aspect = c.clientWidth / c.clientHeight;
+            simCamera.updateProjectionMatrix();
+          }
+        }
+      }, 50);
+    }
+
+    function launchFlightWithCADParams() {
+      switchAppTab('flight-arena');
+    }
+
+    function launchFlightWithAssembledBuild() {
+      switchAppTab('flight-arena');
+    }
+
+    /* App Lifecycle */
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initPhysicsScene();
+      recomputeBOM();
+      onPhysicsInputChange();
+
+      window.addEventListener('resize', () => {
+        const resizeHelper = (renderer, camera, containerId) => {
+          if (!renderer || !camera) return;
+          const c = document.getElementById(containerId);
+          if (c) {
+            renderer.setSize(c.clientWidth, c.clientHeight);
+            camera.aspect = c.clientWidth / c.clientHeight;
+            camera.updateProjectionMatrix();
+          }
+        };
+
+        if (appState.activeTab === 'physics') resizeHelper(physRenderer, physCamera, 'physics-canvas-container');
+        if (appState.activeTab === 'cad') resizeHelper(cadRenderer, cadCamera, 'cad-canvas-container');
+        if (appState.activeTab === 'builder') resizeHelper(assemblerRenderer, assemblerCamera, 'assembler-canvas-container');
+        if (appState.activeTab === 'flight-arena') resizeHelper(simRenderer, simCamera, 'sim-canvas-container');
+      });
+    });
+  </script>
+
+</body></html>
